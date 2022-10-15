@@ -14,6 +14,9 @@ data class Bike(
     @get:PropertyName("image_path") @set:PropertyName("image_path") var imagePath: String? = "",
     var description: String? = "",
     var combination: String? = "",
+    @get:PropertyName("rating_total") @set:PropertyName("rating_total") var ratingTotal: Double? = null,
+    @get:PropertyName("number_of_ratings") @set:PropertyName("number_of_ratings")var numberOfRatings: Int? = null,
+
     @Exclude @DocumentId val documentId: String? = ""
 ):Parcelable{
     @Exclude
@@ -25,7 +28,10 @@ data class Bike(
             "longitude" to longitude,
             "image_path" to imagePath,
             "description" to description,
-            "combination" to combination
+            "combination" to combination,
+            "rating_total" to ratingTotal,
+            "number_of_ratings" to numberOfRatings
+
         )
     }
 }
