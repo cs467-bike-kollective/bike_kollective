@@ -16,6 +16,8 @@
     <string name="login_header">Welcome</string>
     <string name="login_to_signup_button">Sign up</string>
     <string name="login_to_login_button">Login</string>
-    <string name="account_setup_header">Loading...</string>
-    <string name="account_setup_text">One moment as we setup your account...</string>
+    <string name="account_setup_header">Loading…</string>
+    <string name="account_setup_text">One moment as we setup your account…</string>
+    <string name="pink_bike_with_flowers">pink bike with flowers</string>
+    <string name="blue_sport_bike">blue sport bike</string>
 </resources>
