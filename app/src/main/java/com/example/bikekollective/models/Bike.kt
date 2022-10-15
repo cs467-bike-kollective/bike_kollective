@@ -16,7 +16,7 @@ data class Bike(
     var combination: String? = "",
     @get:PropertyName("rating_total") @set:PropertyName("rating_total") var ratingTotal: Double? = null,
     @get:PropertyName("number_of_ratings") @set:PropertyName("number_of_ratings")var numberOfRatings: Int? = null,
-
+    var tags: ArrayList<String>? = null,
     @Exclude @DocumentId val documentId: String? = ""
 ):Parcelable{
     @Exclude
@@ -30,7 +30,8 @@ data class Bike(
             "description" to description,
             "combination" to combination,
             "rating_total" to ratingTotal,
-            "number_of_ratings" to numberOfRatings
+            "number_of_ratings" to numberOfRatings,
+            "tag" to tags
 
         )
     }
