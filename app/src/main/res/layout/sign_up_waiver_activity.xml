@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/signup_button_agree"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#A6A5A5"
+        android:text="@string/signup_button_agree"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_text" />
+
+    <Button
+        android:id="@+id/signup_button_disagree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#A6A5A5"
+        android:text="@string/signup_button_disagree"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_button_agree" />
+
+    <TextView
+        android:id="@+id/signup_header"
+        android:layout_width="109dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="100dp"
+        android:text="@string/signup_header"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/signup_text"
+        android:layout_width="329dp"
+        android:layout_height="224dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/signup_text"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_header" />
+</androidx.constraintlayout.widget.ConstraintLayout>
