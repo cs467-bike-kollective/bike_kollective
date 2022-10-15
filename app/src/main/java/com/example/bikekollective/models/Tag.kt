@@ -1,4 +1,9 @@
 package com.example.bikekollective.models
 
-class Tag {
-}
+import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.Exclude
+
+data class Tag (
+    @Exclude @DocumentId val documentId: String? = "",
+    var name: String? = null
+)
