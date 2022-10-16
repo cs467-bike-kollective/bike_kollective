@@ -20,4 +20,7 @@
     <string name="account_setup_text">One moment as we setup your account…</string>
     <string name="pink_bike_with_flowers">pink bike with flowers</string>
     <string name="blue_sport_bike">blue sport bike</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_sign_up_waiver">SignUpWaiverActivity</string>
+    <string name="title_activity_account_setup">AccountSetupActivity</string>
 </resources>
