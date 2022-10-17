@@ -11,6 +11,8 @@ import android.view.ViewGroup
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+// TODO: Add a Bike
+
 /**
  * A simple [Fragment] subclass.
  * Use the [UserBikeList.newInstance] factory method to
