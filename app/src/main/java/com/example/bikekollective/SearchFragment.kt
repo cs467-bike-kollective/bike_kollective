@@ -11,9 +11,6 @@ import android.view.ViewGroup
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-// Two Bike View
-
-
 /**
  * A simple [Fragment] subclass.
  * Use the [SearchFragment.newInstance] factory method to
