@@ -22,7 +22,7 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraXInfo"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 66
+        private const val REQUEST_CODE_PERMISSIONS = 2022
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private val FROM_ADD_BIKE_CODE = 2000
 
