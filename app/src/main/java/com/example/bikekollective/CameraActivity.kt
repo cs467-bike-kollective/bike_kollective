@@ -7,13 +7,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.camera.core.ImageCapture
 import androidx.core.content.ContextCompat
+import com.example.bikekollective.databinding.ActivityCameraBinding
 import com.example.bikekollective.databinding.ActivityMainBinding
 import java.io.File
 import java.util.concurrent.ExecutorService
 
 typealias LumaListener = (luma: Double) -> Unit
 class CameraActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityCameraBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
     private var destination: Int? = null
@@ -30,7 +31,7 @@ class CameraActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityCameraBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
         destination = intent.getIntExtra("identifier", 23)
