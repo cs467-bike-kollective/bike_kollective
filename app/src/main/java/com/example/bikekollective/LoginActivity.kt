@@ -1,19 +1,11 @@
 package com.example.bikekollective
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import com.example.bikekollective.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -33,29 +25,8 @@ class LoginActivity : AppCompatActivity() {
         private val TAG = "LoginActivity"
     }
 
-    //set up function to handle result from google Auth sign in
-    val startLoginResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data
-            try {
-                val credential = oneTapClient.getSignInCredentialFromIntent(data)
-                val idToken = credential.googleIdToken
-                when {
-                    idToken != null -> {
-                        // Got an ID token from Google. Use it to authenticate
-                        // with Firebase.
-                        Log.d(TAG, "Got ID token.")
-                    }
-                    else -> {
-                        // Shouldn't happen.
-                        Log.d(TAG, "No ID token!")
-                    }
-                }
-            } catch (e: ApiException) {
-                // ...
-            }
-        }
-    }
+//    https://stackoverflow.com/questions/69212531/how-to-use-google-activity-result-api-in-one-tap-sign-in/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -83,8 +54,15 @@ class LoginActivity : AppCompatActivity() {
             .setAutoSelectEnabled(true)
             .build()
 
+        binding.loginButton.setOnClickListener {
+            // Use the Kotlin extension in activity-ktx
+            // passing it the Intent you want to start
+        }
+
 
     }
+
+
 
 
 
