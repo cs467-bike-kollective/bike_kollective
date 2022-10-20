@@ -3,6 +3,9 @@ package com.example.bikekollective
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bikekollective.databinding.ActivityLoginBinding
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -14,18 +17,21 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var auth: FirebaseAuth
-    private lateinit var oneTapClient: SignInClient
-    private lateinit var signInRequest: BeginSignInRequest
-
-    private var showOneTapUI = true
     companion object {
         private val TAG = "LoginActivity"
     }
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var auth: FirebaseAuth
 
-//    https://stackoverflow.com/questions/69212531/how-to-use-google-activity-result-api-in-one-tap-sign-in/
+    private val providers = arrayListOf(
+        AuthUI.IdpConfig.GoogleBuilder().build())
+
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract()
+    ) { res ->
+        this.onSignInResult(res)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,33 +42,39 @@ class LoginActivity : AppCompatActivity() {
         // initialize Firebase Auth
         auth = Firebase.auth
 
-        // set up oneTapClient for Google Authentication
-        oneTapClient = Identity.getSignInClient(this)
-        signInRequest = BeginSignInRequest.builder()
-            .setPasswordRequestOptions(BeginSignInRequest.PasswordRequestOptions.builder()
-                .setSupported(true)
-                .build())
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    // Your server's client ID, not your Android client ID.
-                    .setServerClientId(getString(R.string.default_web_client_id))
-                    // Only show accounts previously used to sign in.
-                    .setFilterByAuthorizedAccounts(true)
-                    .build())
-            // Automatically sign in when exactly one credential is retrieved.
-            .setAutoSelectEnabled(true)
+        // Create and launch sign-in intent
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
             .build()
 
-        binding.loginButton.setOnClickListener {
-            // Use the Kotlin extension in activity-ktx
-            // passing it the Intent you want to start
+        binding.loginButton.setOnClickListener{
+            signInLauncher.launch(signInIntent)
         }
 
 
+}
+
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        if (result.resultCode == RESULT_OK) {
+            // Successfully signed in
+            val user = FirebaseAuth.getInstance().currentUser
+            if (response?.isNewUser == true){
+//                direct user to sign up user
+            }else{
+                //check if user exists in db, if not then user needs to sign waiver
+
+                //send user to home page
+            }
+            // ...
+        } else {
+            // Sign in failed. If response is null the user canceled the
+            // sign-in flow using the back button. Otherwise check
+            // response.getError().getErrorCode() and handle the error.
+            // ...
+        }
     }
-
-
 
 
 
