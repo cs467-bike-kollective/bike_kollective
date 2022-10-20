@@ -4,6 +4,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foregroundTint="#000000"
     tools:context=".CreateBikeActivity">
+
+    <EditText
+        android:id="@+id/bike_location"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="124dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/create_form_location"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bike_lock_combination"
+        app:layout_constraintVertical_bias="0.921"
+        android:autofillHints="Los Angeles, California"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/bike_lock_combination"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="212dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/create_form_combination"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bike_description"
+        android:autofillHints="12345"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/bike_description"
+        android:layout_width="324dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="302dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/create_form_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="Bike for icy terrain"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/open_camera_button"
+        android:layout_width="237dp"
+        android:layout_height="211dp"
+        android:backgroundTint="#616161"
+        android:text="@string/create_form_camera"
+        app:layout_constraintBottom_toTopOf="@+id/bike_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/submit_form_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/create_form_submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bike_location"
+        app:layout_constraintVertical_bias="0.923" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
