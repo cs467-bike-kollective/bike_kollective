@@ -10,7 +10,6 @@ import com.example.bikekollective.databinding.ActivitySignUpWaiverBinding
 
 class SignUpWaiverActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivitySignUpWaiverBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

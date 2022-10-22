@@ -10,7 +10,7 @@ import com.example.bikekollective.databinding.ActivityAccountSetupBinding
 
 class AccountSetupActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
+
     private lateinit var binding: ActivityAccountSetupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,15 +20,9 @@ class AccountSetupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val navController = findNavController(R.id.nav_host_fragment_content_account_setup)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_account_setup)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }
+
 }

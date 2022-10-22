@@ -1,6 +1,8 @@
 package com.example.bikekollective
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bikekollective.databinding.ActivityLoginBinding
 import com.firebase.ui.auth.AuthUI
@@ -58,9 +60,15 @@ class LoginActivity : AppCompatActivity() {
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
+            Log.w(TAG, "Result ok")
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
-            if (response?.isNewUser == true){
+            Log.w(TAG, user?.metadata.toString())
+
+            val signInIntent = Intent(this, SignUpWaiverActivity::class.java)
+            startActivity(signInIntent)
+            if (result?.idpResponse?.isNewUser == true){
+                Log.w(TAG, "new user")
 //                direct user to sign up user
             }else{
                 //check if user exists in db, if not then user needs to sign waiver
@@ -73,6 +81,7 @@ class LoginActivity : AppCompatActivity() {
             // sign-in flow using the back button. Otherwise check
             // response.getError().getErrorCode() and handle the error.
             // ...
+            Log.w(TAG, "Result Error")
         }
     }
 
