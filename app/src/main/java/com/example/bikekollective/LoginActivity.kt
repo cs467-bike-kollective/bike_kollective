@@ -109,6 +109,7 @@ class LoginActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val user = auth.currentUser
         updateUI(user)
+        finish()
     }
 
 }

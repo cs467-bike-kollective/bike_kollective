@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/signup_button_agree"
+        android:id="@+id/btn_signup_agree"
         android:layout_width="118dp"
         android:layout_height="48dp"
         android:layout_marginTop="60dp"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signup_text" />
 
     <Button
-        android:id="@+id/signup_button_disagree"
+        android:id="@+id/btn_signup_disagree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -27,7 +27,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_button_agree" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup_agree" />
 
     <TextView
         android:id="@+id/signup_header"
