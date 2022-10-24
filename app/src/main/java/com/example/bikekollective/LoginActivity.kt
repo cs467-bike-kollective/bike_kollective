@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
     }
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private var db = Firebase.firestore
 
     private val providers = arrayListOf(
         AuthUI.IdpConfig.GoogleBuilder().build())
@@ -63,17 +65,17 @@ class LoginActivity : AppCompatActivity() {
             Log.w(TAG, "Result ok")
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
-            Log.w(TAG, user?.metadata.toString())
 
-            val signInIntent = Intent(this, SignUpWaiverActivity::class.java)
-            startActivity(signInIntent)
             if (result?.idpResponse?.isNewUser == true){
                 Log.w(TAG, "new user")
-//                direct user to sign up user
-            }else{
-                //check if user exists in db, if not then user needs to sign waiver
+                // direct user to sign up user
+                toSignWaiverActivity()
+                finish()
 
-                //send user to home page
+            }else{
+                val user = auth.currentUser
+                Log.i(TAG, "not new")
+                updateUI(user)
             }
             // ...
         } else {
@@ -85,33 +87,29 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateUI(user: FirebaseUser?) {
+        if(user==null){
+            Log.i(TAG, "null user")
+            return
+        }
+
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
 
 
+    }
 
+    private fun toSignWaiverActivity() {
+        val signInIntent = Intent(this, SignUpWaiverActivity::class.java)
+        startActivity(signInIntent)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val user = auth.currentUser
+        updateUI(user)
+    }
 
 }
 
-//override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//    super.onActivityResult(requestCode, resultCode, data)
-//
-//    when (requestCode) {
-//        REQ_ONE_TAP -> {
-//            try {
-//                val credential = oneTapClient.getSignInCredentialFromIntent(data)
-//                val idToken = credential.googleIdToken
-//                when {
-//                    idToken != null -> {
-//                        // Got an ID token from Google. Use it to authenticate
-//                        // with Firebase.
-//                        Log.d(TAG, "Got ID token.")
-//                    }
-//                    else -> {
-//                        // Shouldn't happen.
-//                        Log.d(TAG, "No ID token!")
-//                    }
-//                }
-//            } catch (e: ApiException) {
-//                // ...
-//            }
-//        }
-//    }

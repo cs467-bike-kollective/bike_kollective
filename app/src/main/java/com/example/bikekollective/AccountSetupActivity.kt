@@ -10,7 +10,6 @@ import com.example.bikekollective.databinding.ActivityAccountSetupBinding
 
 class AccountSetupActivity : AppCompatActivity() {
 
-
     private lateinit var binding: ActivityAccountSetupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
