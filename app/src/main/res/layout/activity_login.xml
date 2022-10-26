@@ -33,19 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_header"
         app:srcCompat="@drawable/pink_bike_flowers" />
 
-    <Button
-        android:id="@+id/login_to_signup_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="#A6A5A5"
-        android:text="@string/login_to_signup_button"
-        android:textColor="#000000"
-        app:iconTint="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_splash_image" />
+
 
     <Button
         android:id="@+id/login_button"
@@ -58,6 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_to_signup_button"
+        app:layout_constraintTop_toBottomOf="@+id/login_splash_image"
         app:layout_constraintVertical_bias="0.183" />
 </androidx.constraintlayout.widget.ConstraintLayout>

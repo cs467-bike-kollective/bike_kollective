@@ -8,13 +8,8 @@ import com.example.bikekollective.databinding.ActivityLoginBinding
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -25,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     }
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
-    private var db = Firebase.firestore
+
 
     private val providers = arrayListOf(
         AuthUI.IdpConfig.GoogleBuilder().build())
@@ -36,15 +31,24 @@ class LoginActivity : AppCompatActivity() {
         this.onSignInResult(res)
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        // initialize Firebase Auth
+        val user = AuthUI.getInstance().auth.currentUser
 
+        updateUI(user)
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // initialize Firebase Auth
+        auth = AuthUI.getInstance().auth
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // initialize Firebase Auth
-        auth = Firebase.auth
+
 
         // Create and launch sign-in intent
         val signInIntent = AuthUI.getInstance()
@@ -61,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         val response = result.idpResponse
+        val auth = Firebase.auth
         if (result.resultCode == RESULT_OK) {
             Log.w(TAG, "Result ok")
             // Successfully signed in
@@ -73,7 +78,9 @@ class LoginActivity : AppCompatActivity() {
                 finish()
 
             }else{
+
                 val user = auth.currentUser
+                //temp to sign in waiver
                 Log.i(TAG, "not new")
                 updateUI(user)
             }
@@ -89,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if(user==null){
-            Log.i(TAG, "null user")
+            Log.i(TAG, "null user!")
             return
         }
 
@@ -103,14 +110,8 @@ class LoginActivity : AppCompatActivity() {
         val signInIntent = Intent(this, SignUpWaiverActivity::class.java)
         startActivity(signInIntent)
     }
+//
 
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val user = auth.currentUser
-        updateUI(user)
-        finish()
-    }
 
 }
 
