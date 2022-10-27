@@ -105,6 +105,7 @@
             android:layout_marginTop="40dp"
             android:text="Choose tags"
             android:textSize="20dp"
+            android:textColor="@color/black"
             android:id="@+id/choose_tag_title"
             app:layout_constraintStart_toStartOf="@+id/bike_location"
             app:layout_constraintTop_toBottomOf="@id/bike_location"/>
