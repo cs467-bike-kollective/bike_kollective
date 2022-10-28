@@ -1,6 +1,7 @@
 package com.example.bikekollective
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -39,6 +40,10 @@ class CameraActivity : AppCompatActivity() {
 
         // hide action bar
         supportActionBar?.hide();
+
+        binding.ivExitCamera.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 
 }
