@@ -42,7 +42,7 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide();
 
         binding.ivExitCamera.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, CreateBikeActivity::class.java))
         }
     }
 
