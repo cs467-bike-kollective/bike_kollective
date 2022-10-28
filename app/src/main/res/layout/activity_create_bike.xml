@@ -50,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
 
+
         <EditText
             android:id="@+id/bike_location"
             android:layout_width="320dp"
@@ -57,7 +58,6 @@
             android:layout_marginTop="40dp"
 
             android:ems="10"
-            android:inputType="textPersonName"
 
             android:text="@string/create_form_location"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,6 +121,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/choose_tag_title">
+
 
 
             <!-- Chips can be declared here, or added dynamically. -->
