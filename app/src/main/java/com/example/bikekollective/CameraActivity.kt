@@ -37,6 +37,8 @@ class CameraActivity : AppCompatActivity() {
         setContentView(view)
         destination = intent.getIntExtra("identifier", 23)
 
+        // hide action bar
+        supportActionBar?.hide();
     }
 
 }
