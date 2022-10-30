@@ -3,16 +3,19 @@ package com.example.bikekollective
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
 
 class CreateBikeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateBikeBinding
     private var longitude: Double? = null
     private var latitude: Double? = null
+    private var photoUri: Uri? = null
     companion object {
         private const val TAG = "CameraXInfo"
         private const val CREATE_BIKE_IDENTIFIER = 1001
@@ -23,7 +26,13 @@ class CreateBikeActivity : AppCompatActivity() {
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data
-            data?.extras?.get("image")
+            photoUri = data?.extras?.get("imageUri") as Uri
+            if (photoUri != null){
+                Glide.with(baseContext)
+                    .load(photoUri)
+                    .into(binding.bikeImage)
+            }
+
 
         }
     }

@@ -32,6 +32,8 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var destination: Int? = null
     private lateinit var outPutDirectory: File
+    private var latitude: Double? = null
+    private var longitude: Double? = null
 
     companion object {
         private const val TAG = "CameraXInfo"
@@ -49,12 +51,13 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        destination = intent.getIntExtra("identifier", 23)
+        destination = intent.getIntExtra("identifier", 1)
 
 //        // hide action bar
         supportActionBar?.hide();
 
         binding.ivExitCamera.setOnClickListener {
+            //todo check if it's from create bike activity
             startActivity(Intent(this, CreateBikeActivity::class.java))
         }
 
@@ -68,6 +71,9 @@ class CameraActivity : AppCompatActivity() {
 
         binding.btnGetFromAlbum.setOnClickListener {
 
+        }
+        binding.btnCapture.setOnClickListener {
+            takePhoto()
         }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -130,11 +136,18 @@ class CameraActivity : AppCompatActivity() {
                     Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
 
-                override fun
-                        onImageSaved(output: ImageCapture.OutputFileResults){
+                override fun onImageSaved(output: ImageCapture.OutputFileResults){
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
+                    if (destination == FROM_ADD_BIKE_CODE){
+                        var intentCreateBikeActivity = Intent(baseContext, CreateBikeActivity::class.java)
+                        intentCreateBikeActivity.putExtra("imageUri", output.savedUri)
+                        startActivity(intentCreateBikeActivity)
+                        finish()
+
+                    }
+
                 }
             }
         )
