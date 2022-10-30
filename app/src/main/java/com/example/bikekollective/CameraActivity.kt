@@ -1,6 +1,7 @@
 package com.example.bikekollective
 
 import android.Manifest
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -141,9 +142,10 @@ class CameraActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
                     if (destination == FROM_ADD_BIKE_CODE){
-                        var intentCreateBikeActivity = Intent(baseContext, CreateBikeActivity::class.java)
+                        var intentCreateBikeActivity = Intent()
                         intentCreateBikeActivity.putExtra("imageUri", output.savedUri)
-                        startActivity(intentCreateBikeActivity)
+
+                        setResult(Activity.RESULT_OK, intentCreateBikeActivity)
                         finish()
 
                     }

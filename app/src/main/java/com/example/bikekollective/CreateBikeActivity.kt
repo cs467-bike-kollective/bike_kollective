@@ -17,16 +17,19 @@ class CreateBikeActivity : AppCompatActivity() {
     private var latitude: Double? = null
     private var photoUri: Uri? = null
     companion object {
-        private const val TAG = "CameraXInfo"
+        private const val TAG = "CreateBikeActivity"
         private const val CREATE_BIKE_IDENTIFIER = 1001
     }
 
 
     private val resultLauncherCameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        Log.i("TAG", "HERE")
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data
+
             photoUri = data?.extras?.get("imageUri") as Uri
+
             if (photoUri != null){
                 Glide.with(baseContext)
                     .load(photoUri)
