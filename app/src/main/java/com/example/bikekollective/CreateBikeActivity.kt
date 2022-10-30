@@ -2,22 +2,32 @@ package com.example.bikekollective
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Camera
 import android.graphics.Color
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.bikekollective.databinding.ActivityCameraBinding
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
 
 class CreateBikeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateBikeBinding
+    private var longitude: Double? = null
+    private var latitude: Double? = null
     companion object {
         private const val TAG = "CameraXInfo"
+        private const val CREATE_BIKE_IDENTIFIER = 1001
     }
+
+
+    private val resultLauncherCameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            data?.extras?.get("image")
+
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,10 +39,9 @@ class CreateBikeActivity : AppCompatActivity() {
         // hide action bar
         supportActionBar?.hide();
 
-//        https://stackoverflow.com/a/66096319
 
         binding.bikeImage.setOnClickListener {
-            startActivity(Intent(this, CameraActivity::class.java))
+            openCameraForResult()
         }
         binding.submitFormButton.setOnClickListener {
             // prevent user from submitting form multiple times
@@ -52,7 +61,13 @@ class CreateBikeActivity : AppCompatActivity() {
             }
 
             Log.i(TAG, "$descriptionInput $combinationInput")
+            binding.submitFormButton.isEnabled = true
         }
+    }
+    private fun openCameraForResult() {
+        val intentCameraActivity = Intent(this, CameraActivity::class.java)
+        intentCameraActivity.putExtra("identifier", CREATE_BIKE_IDENTIFIER)
+        resultLauncherCameraActivity.launch(intentCameraActivity)
     }
 
 }

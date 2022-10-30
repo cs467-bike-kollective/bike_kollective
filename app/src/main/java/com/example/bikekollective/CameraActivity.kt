@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 
 import androidx.core.content.ContextCompat
 import com.example.bikekollective.databinding.ActivityCameraBinding
-import com.example.bikekollective.databinding.ActivityMainBinding
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,8 +37,10 @@ class CameraActivity : AppCompatActivity() {
         private const val TAG = "CameraXInfo"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 2022
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private val FROM_ADD_BIKE_CODE = 2000
+        private val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
+        private val FROM_ADD_BIKE_CODE = 1001
+        private val PERMISSION_CODE_ALBUM = 5001;
+//        val REQUIRED_PERMISSIONS_ALBUM = arrayOf(android.Manifest.permission.)
 
     }
 
@@ -50,7 +51,7 @@ class CameraActivity : AppCompatActivity() {
         setContentView(view)
         destination = intent.getIntExtra("identifier", 23)
 
-        // hide action bar
+//        // hide action bar
         supportActionBar?.hide();
 
         binding.ivExitCamera.setOnClickListener {
@@ -58,23 +59,31 @@ class CameraActivity : AppCompatActivity() {
         }
 
         // Request camera permissions
-        if (allPermissionsGranted()) {
+        if (cameraPermissionsGranted()) {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
-                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+                this, REQUIRED_PERMISSIONS_CAMERA, REQUEST_CODE_PERMISSIONS)
         }
 
+        binding.btnGetFromAlbum.setOnClickListener {
 
+        }
 
         cameraExecutor = Executors.newSingleThreadExecutor()
 
     }
+
+//    private fun openAlbum() {
+//        TODO("Not yet implemented")
+//    }
+
+
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
+            if (cameraPermissionsGranted()) {
                 startCamera()
             } else {
                 Toast.makeText(
@@ -86,6 +95,9 @@ class CameraActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
     private fun takePhoto() {
         // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
@@ -129,7 +141,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
 
-    private fun captureVideo() {}
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -166,10 +177,14 @@ class CameraActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+    private fun cameraPermissionsGranted() = REQUIRED_PERMISSIONS_CAMERA.all {
         ContextCompat.checkSelfPermission(
             baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
+//    private fun albumPermissionGranted() = REQUIRED_PERMISSIONS_ALBUM.all {
+//        ContextCompat.checkSelfPermission(
+//            baseContext, it) == PackageManager.PERMISSION_GRANTED
+//    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -41,7 +41,7 @@
     </androidx.camera.view.PreviewView>
 
     <ImageView
-        android:id="@+id/btn_library"
+        android:id="@+id/btn_get_from_album"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
