@@ -7,15 +7,28 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
+import com.example.bikekollective.models.Bike
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.util.concurrent.ThreadLocalRandom
 
 class CreateBikeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateBikeBinding
     private var longitude: Double? = null
     private var latitude: Double? = null
     private var photoUri: Uri? = null
+
+    private lateinit var firebaseStorage: StorageReference
+    private val db = Firebase.firestore
+    private lateinit var auth: FirebaseAuth
+    private val userID = "4FabrsQnM7wkggTDGcF2"
     companion object {
         private const val TAG = "CreateBikeActivity"
         private const val CREATE_BIKE_IDENTIFIER = 1001
@@ -43,10 +56,14 @@ class CreateBikeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
         binding = ActivityCreateBikeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        firebaseStorage = FirebaseStorage.getInstance().getReference();
+
 
         // hide action bar
         supportActionBar?.hide();
@@ -56,6 +73,11 @@ class CreateBikeActivity : AppCompatActivity() {
             openCameraForResult()
         }
         binding.submitFormButton.setOnClickListener {
+            var missingFields = false
+            //create temp lat and long
+            latitude = ThreadLocalRandom.current().nextDouble(33.0, 34.351711,);
+            longitude = ThreadLocalRandom.current().nextDouble(-118.654626,  -118.046890);
+
             // prevent user from submitting form multiple times
             binding.submitFormButton.isEnabled = false
 
@@ -65,15 +87,65 @@ class CreateBikeActivity : AppCompatActivity() {
             if (descriptionInput.isEmpty()){
                 binding.bikeDescription.hint = "Add Description"
                 binding.bikeDescription.setHintTextColor(Color.RED)
+                missingFields = true
             }
             // check if the combination entered is not empty
             if (combinationInput.isEmpty()){
                 binding.bikeLockCombination.hint = "Add Combination"
                 binding.bikeLockCombination.setHintTextColor(Color.RED)
+                missingFields = true
             }
 
+            if (!missingFields){
+                val imageRef = firebaseStorage.child("$userID/bikes/${System.currentTimeMillis()}_photo.jpg")
+                imageRef.putFile(photoUri!!)
+                    .continueWithTask { photoUploadTask ->
+                        imageRef.downloadUrl
+
+                    }.continueWith { downloadUrl ->
+                        Log.i(TAG, downloadUrl.result.toString())
+                        var bike = Bike(
+                            userID,
+                            true,
+                            latitude,
+                            longitude,
+                            downloadUrl.result.toString(),
+                            descriptionInput,
+                            combinationInput,
+                            0.0,
+                            0,
+                            0.0,
+                            null,
+                            ""
+                        )
+                        db.collection("bikes").add(bike).addOnSuccessListener {
+                            Toast.makeText(
+                            this,
+                            "Bike Added.",
+                            Toast.LENGTH_SHORT
+                            ).show()
+                            //            reset the input
+                            binding.bikeDescription.hint = "Description"
+                            binding.bikeLockCombination.hint = "Combination"
+                            Glide.with(baseContext)
+                                .load(R.drawable.pink_bike_flowers)
+                                .into(binding.bikeImage)
+
+                            binding.submitFormButton.isEnabled = true
+                        }.addOnFailureListener {
+
+                        }
+                        binding.submitFormButton.isEnabled = true
+
+                    }
+            }
             Log.i(TAG, "$descriptionInput $combinationInput")
-            binding.submitFormButton.isEnabled = true
+
+
+
+
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
         }
     }
     private fun openCameraForResult() {
@@ -81,5 +153,6 @@ class CreateBikeActivity : AppCompatActivity() {
         intentCameraActivity.putExtra("identifier", CREATE_BIKE_IDENTIFIER)
         resultLauncherCameraActivity.launch(intentCameraActivity)
     }
+
 
 }
