@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/homeFrag"
+        layout="@layout/fragment_home"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
