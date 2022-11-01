@@ -8,7 +8,7 @@
     tools:context=".EditBikeActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar2"
+        android:id="@+id/edit_toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_exit_camera"
+            android:id="@+id/edit_iv_exit_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintTop_toBottomOf="@+id/edit_toolbar2"
         >
 
 
@@ -47,9 +47,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+            app:layout_constraintTop_toBottomOf="@+id/edit_toolbar2">
     <ImageView
-        android:id="@+id/open_camera_button"
+        android:id="@+id/edit_open_camera_button"
         android:layout_width="237dp"
         android:layout_height="211dp"
         android:layout_marginTop="40dp"
@@ -62,21 +62,21 @@
         tools:ignore="ContentDescription" />
 
     <EditText
-        android:id="@+id/bike_description"
+        android:id="@+id/edit_bike_description"
         android:layout_width="324dp"
         android:layout_height="49dp"
         android:layout_marginTop="40dp"
-        android:autofillHints="Bike for icy terrain"
+        android:autofillHints="Hybrid bike for city roads"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/create_form_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_camera_button"
+        app:layout_constraintTop_toBottomOf="@+id/edit_open_camera_button"
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/bike_lock_combination"
+        android:id="@+id/edit_bike_lock_combination"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
@@ -88,23 +88,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bike_description"
+        app:layout_constraintTop_toBottomOf="@+id/edit_bike_description"
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/bike_location"
+        android:id="@+id/edit_bike_location"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
-
         android:ems="10"
         android:inputType="textPersonName"
-
         android:text="@string/create_form_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bike_lock_combination"
+        app:layout_constraintTop_toBottomOf="@+id/edit_bike_lock_combination"
         tools:ignore="Autofill,LabelFor" />
 
     <TextView
@@ -114,12 +112,12 @@
         android:text="@string/edit_choose_tags"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:id="@+id/choose_tag_title"
-        app:layout_constraintStart_toStartOf="@+id/bike_location"
-        app:layout_constraintTop_toBottomOf="@id/bike_location"/>
+        android:id="@+id/edit_choose_tag_title"
+        app:layout_constraintStart_toStartOf="@+id/edit_bike_location"
+        app:layout_constraintTop_toBottomOf="@id/edit_bike_location"/>
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/edit_chipGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -127,12 +125,12 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/choose_tag_title">
+        app:layout_constraintTop_toBottomOf="@id/edit_choose_tag_title">
 
 
         <!-- Chips can be declared here, or added dynamically. -->
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip"
+            android:id="@+id/edit_tag"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,7 +138,7 @@
             tools:ignore="HardcodedText" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip1"
+            android:id="@+id/edit_tag1"
             style="@style/Widget.MaterialComponents.Chip.Filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -149,7 +147,7 @@
     </com.google.android.material.chip.ChipGroup>
 
     <Button
-        android:id="@+id/submit_form_button"
+        android:id="@+id/edit_submit_form_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -158,7 +156,7 @@
         android:text="@string/create_form_submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_chipGroup" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
