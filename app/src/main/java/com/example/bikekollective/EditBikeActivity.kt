@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bikekollective.databinding.ActivityEditBikeBinding
 import android.graphics.Color
+import android.content.Intent
 
 class EditBikeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditBikeBinding
@@ -41,6 +42,10 @@ class EditBikeActivity : AppCompatActivity() {
 
             Log.i(TAG, "$descriptionInput $combinationInput")
             binding.editSubmitFormButton.isEnabled = true
+        }
+
+        binding.editIvExitCamera.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 }
