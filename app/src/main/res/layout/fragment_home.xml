@@ -53,6 +53,7 @@
         android:id="@+id/returnBikeBut">
     </Button>
 
+    <!-- Bike
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
         android:background="#D3D3D3"
         app:menu="@menu/bottom_nav_menu">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+    Image-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
