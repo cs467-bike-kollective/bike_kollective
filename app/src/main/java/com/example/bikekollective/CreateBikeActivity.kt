@@ -131,6 +131,9 @@ class CreateBikeActivity : AppCompatActivity() {
                                 .load(R.drawable.pink_bike_flowers)
                                 .into(binding.bikeImage)
 
+                            //clear data on form and re-enable button
+                            binding.bikeDescription.text.clear()
+                            binding.bikeLockCombination.text.clear()
                             binding.submitFormButton.isEnabled = true
                         }.addOnFailureListener {
 
@@ -142,7 +145,7 @@ class CreateBikeActivity : AppCompatActivity() {
             Log.i(TAG, "$descriptionInput $combinationInput")
 
 
-
+            binding.submitFormButton.isEnabled = true
 
 //            startActivity(Intent(this, MainActivity::class.java))
 //            finish()
