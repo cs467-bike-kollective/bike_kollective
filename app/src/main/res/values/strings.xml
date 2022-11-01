@@ -28,4 +28,7 @@
     <string name="create_form_camera">Tap to add photo</string>
     <string name="create_form_location">Location:</string>
     <string name="create_form_submit">Submit</string>
+    <string name="edit_close_camera_button">close camera button</string>
+    <string name="edit_choose_tags">Choose tags</string>
+    <string name="edit_form_submit">Submit</string>
 </resources>
