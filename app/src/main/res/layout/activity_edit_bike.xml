@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditBikeActivity">
+
+    <ImageView
+        android:id="@+id/open_camera_button"
+        android:layout_width="237dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#616161"
+        android:text="@string/create_form_camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pink_bike_flowers"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/bike_description"
+        android:layout_width="324dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="40dp"
+        android:autofillHints="Bike for icy terrain"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/create_form_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open_camera_button"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/bike_lock_combination"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="212dp"
+        android:autofillHints="12345"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/create_form_combination"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bike_description"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/bike_location"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        android:text="@string/create_form_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bike_lock_combination"
+        tools:ignore="Autofill,LabelFor" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
