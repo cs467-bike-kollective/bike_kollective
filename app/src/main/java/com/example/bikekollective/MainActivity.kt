@@ -1,22 +1,37 @@
 package com.example.bikekollective
 
+import android.content.Intent
 import android.os.Bundle
+
+import android.util.Log
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bikekollective.databinding.ActivityMainBinding
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var auth: FirebaseAuth
+
+    companion object {
+        private val TAG = "MainActivity"
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.i(TAG, "HERE")
 
         // Bottom Navigation View
         val bottomNavigationView = binding.bottomNav
@@ -27,5 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setupWithNavController(navController)
 
+
     }
+
 }

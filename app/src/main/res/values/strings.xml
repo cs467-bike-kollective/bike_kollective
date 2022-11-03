@@ -11,7 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="signup_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec laoreet augue. Vestibulum in sagittis purus. Ut congue turpis ac odio faucibus, sit amet fermentum lacus commodo. Integer sed lectus id nisl pulvinar rutrum. Phasellus dignissim vitae justo ac pharetra. Aliquam placerat nisi sit amet justo tincidunt dapibus. Nam pretium, sapien ac consectetur lacinia, sapien leo placerat dolor, ut dignissim quam magna vitae lectus.</string>
     <string name="signup_header">Agreement</string>
-    <string name="signup_button_disagree">I disagree</string>
+    <string name="signup_button_disagree">Cancel</string>
     <string name="signup_button_agree">I agree</string>
     <string name="login_header">Welcome</string>
     <string name="login_to_signup_button">Sign up</string>
@@ -23,6 +23,13 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_sign_up_waiver">SignUpWaiverActivity</string>
     <string name="title_activity_account_setup">AccountSetupActivity</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="create_form_description">Description</string>
+    <string name="create_form_combination">Lock Combination</string>
+    <string name="create_form_camera">Tap to add photo</string>
+    <string name="create_form_location">Location:</string>
+    <string name="create_form_submit">Submit</string>
+    <string name="edit_close_camera_button">close camera button</string>
+    <string name="edit_choose_tags">Choose tags</string>
+    <string name="edit_form_submit">Submit</string>
 </resources>
