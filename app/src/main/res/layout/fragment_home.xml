@@ -53,6 +53,18 @@
         android:id="@+id/returnBikeBut">
     </Button>
 
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/returnBikeBut">
+
+    </Button>
+
     <!-- Bike
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
