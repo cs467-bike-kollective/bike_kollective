@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.BikeKollective" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.BikeKollective" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,14 +12,16 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
     </style>
 
     <style name="Theme.BikeKollective.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
     </style>
 
-    <style name="Theme.BikeKollective.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.BikeKollective.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark" />
 
-    <style name="Theme.BikeKollective.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.BikeKollective.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
 </resources>

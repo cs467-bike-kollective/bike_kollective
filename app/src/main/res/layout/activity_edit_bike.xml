@@ -140,22 +140,6 @@
                 app:layout_constraintTop_toBottomOf="@id/edit_choose_tag_title">
 
 
-                <!-- Chips can be declared here, or added dynamically. -->
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/edit_tag"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="data here"
-                    tools:ignore="HardcodedText" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/edit_tag1"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="data here"
-                    tools:ignore="HardcodedText" />
             </com.google.android.material.chip.ChipGroup>
 
             <Button

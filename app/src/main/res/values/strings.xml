@@ -32,4 +32,6 @@
     <string name="edit_close_camera_button">close camera button</string>
     <string name="edit_choose_tags">Choose tags</string>
     <string name="edit_form_submit">Submit</string>
+    <string name="title_activity_pick_location_maps">PickLocationMapsActivity</string>
+    <string name="current_location">Current Location:</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.bikekollective
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -14,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
 import com.example.bikekollective.models.Bike
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -68,8 +70,22 @@ class CreateBikeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        //ensure that tags aren't null and add chip choices
+        if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
+            (applicationContext as ApplicationContext).queryUserBikes()
+        }else{
+            (applicationContext as ApplicationContext).bikeTagList?.forEach{ tag ->
+                binding.chipGroup.addView(createTagChip(baseContext, tag?.name.toString()))
+            }
+
+        }
+
         // hide action bar
         supportActionBar?.hide();
+
+        binding.bikeLocation.setOnClickListener {
+            startActivity(Intent(this, PickLocationMapsActivity::class.java))
+        }
 
         binding.ivExitCreateBike.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
@@ -165,6 +181,15 @@ class CreateBikeActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun createTagChip(baseContext: Context?, tagString: String): Chip {
+        return Chip(this@CreateBikeActivity).apply {
+            text = tagString
+
+        }
+
+    }
+
     private fun openCameraForResult() {
         val intentCameraActivity = Intent(this, CameraActivity::class.java)
         intentCameraActivity.putExtra("identifier", CREATE_BIKE_IDENTIFIER)
