@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
+import com.example.bikekollective.databinding.ChipBinding
 import com.example.bikekollective.models.Bike
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
@@ -40,12 +41,15 @@ class CreateBikeActivity : AppCompatActivity() {
 
 
     private val resultLauncherCameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        binding.tvChoosePhoto.visibility = View.INVISIBLE
         Log.i("TAG", "HERE")
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data
 
-            photoUri = data?.extras?.get("imageUri") as Uri
+            photoUri = Uri.parse( data?.extras?.getString("imageUri"))
+
+
 
             if (photoUri != null){
                 Glide.with(baseContext)
@@ -79,6 +83,7 @@ class CreateBikeActivity : AppCompatActivity() {
             }
 
         }
+        binding.progressBar.visibility = View.GONE
 
         // hide action bar
         supportActionBar?.hide();
@@ -95,6 +100,7 @@ class CreateBikeActivity : AppCompatActivity() {
             openCameraForResult()
         }
         binding.submitFormButton.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             val userID = auth.currentUser?.uid.toString()
             var missingFields = false
             //create temp lat and long
@@ -164,12 +170,15 @@ class CreateBikeActivity : AppCompatActivity() {
                             binding.bikeDescription.text.clear()
                             binding.bikeLockCombination.text.clear()
                             binding.submitFormButton.isEnabled = true
+                            binding.progressBar.visibility = View.INVISIBLE
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }.addOnFailureListener {
-
+                            binding.submitFormButton.isEnabled = true
+                            binding.progressBar.visibility = View.INVISIBLE
                         }
                         binding.submitFormButton.isEnabled = true
+                        binding.progressBar.visibility = View.INVISIBLE
 
                     }
             }
@@ -177,16 +186,17 @@ class CreateBikeActivity : AppCompatActivity() {
 
 
             binding.submitFormButton.isEnabled = true
+            binding.progressBar.visibility = View.INVISIBLE
 
 
         }
     }
 
     private fun createTagChip(baseContext: Context?, tagString: String): Chip {
-        return Chip(this@CreateBikeActivity).apply {
-            text = tagString
 
-        }
+        val chip = ChipBinding.inflate(layoutInflater).root
+        chip.text = tagString
+        return chip
 
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.bikekollective.databinding.ActivityEditBikeBinding
 import android.graphics.Color
 import android.content.Intent
+import com.example.bikekollective.databinding.ChipBinding
 import com.google.android.material.chip.Chip
 
 class EditBikeActivity : AppCompatActivity() {
@@ -60,10 +61,9 @@ class EditBikeActivity : AppCompatActivity() {
     }
 
     private fun createTagChip(baseContext: Context?, tagString: String): Chip {
-        return Chip(this@EditBikeActivity).apply {
-            text = tagString
-
-        }
+        val chip = ChipBinding.inflate(layoutInflater).root
+        chip.text = tagString
+        return chip
 
     }
 }

@@ -89,6 +89,7 @@ class CameraActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults:
         IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (cameraPermissionsGranted()) {
                 startCamera()
@@ -143,7 +144,7 @@ class CameraActivity : AppCompatActivity() {
                     Log.d(TAG, msg)
                     if (destination == FROM_ADD_BIKE_CODE){
                         var intentCreateBikeActivity = Intent()
-                        intentCreateBikeActivity.putExtra("imageUri", output.savedUri)
+                        intentCreateBikeActivity.putExtra("imageUri", output.savedUri.toString())
 
                         setResult(Activity.RESULT_OK, intentCreateBikeActivity)
                         finish()
