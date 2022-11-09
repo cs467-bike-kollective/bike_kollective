@@ -76,7 +76,7 @@ class CreateBikeActivity : AppCompatActivity() {
 
         //ensure that tags aren't null and add chip choices
         if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
-            (applicationContext as ApplicationContext).queryUserBikes()
+            (applicationContext as ApplicationContext).queryBikeTags()
         }else{
             (applicationContext as ApplicationContext).bikeTagList?.forEach{ tag ->
                 binding.chipGroup.addView(createTagChip(baseContext, tag?.name.toString()))

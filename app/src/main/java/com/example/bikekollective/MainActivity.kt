@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setupWithNavController(navController)
         if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
+            (applicationContext as ApplicationContext).queryBikeTags()
+
+        }
+        if ((applicationContext as ApplicationContext).userBikeList.isNullOrEmpty()){
             (applicationContext as ApplicationContext).queryUserBikes()
 
         }

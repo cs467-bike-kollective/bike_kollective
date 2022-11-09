@@ -14,7 +14,7 @@ import com.google.firebase.ktx.Firebase
 class ApplicationContext: Application() {
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-    private var userBikeList: MutableList<Bike?>? = null
+    var userBikeList: MutableList<Bike?>? = null
     var bikeTagList: MutableList<Tag?>? = null
 
     companion object{
@@ -30,7 +30,7 @@ class ApplicationContext: Application() {
         queryBikeTags()
     }
 
-    private fun queryBikeTags(){
+    fun queryBikeTags(){
         db.collection("tags").get().addOnSuccessListener { snapshot ->
             bikeTagList = snapshot.toObjects(Tag::class.java)
             Log.i(TAG, bikeTagList.toString())
@@ -38,13 +38,13 @@ class ApplicationContext: Application() {
         }
     }
     fun queryUserBikes(){
-        db.collection("bikes").whereEqualTo("owner_id", auth.currentUser?.uid)
+        db.collection("bikes").whereEqualTo("owner_id", auth.currentUser?.uid.toString())
             .get().addOnSuccessListener { snapshot ->
                 userBikeList = snapshot.toObjects(Bike::class.java)
 
 
         }
-
+        Log.i(TAG, "HERE" + userBikeList.toString())
 
     }
     fun addBike(newBike: Bike){

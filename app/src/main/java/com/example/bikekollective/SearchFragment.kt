@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class SearchFragment : Fragment() {
-    private val recyclerView: RecyclerView? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +20,7 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
 
         return inflater.inflate(R.layout.fragment_search, container, false)
 

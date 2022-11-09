@@ -13,7 +13,7 @@ import com.example.bikekollective.models.Bike
 
 
 class UserBikeListAdapter(
-    val context:Context,
+    val context:Context?,
     var userBikeList: MutableList<Bike?>?
 
     ) : RecyclerView.Adapter<UserBikeListAdapter.ViewHolder>(){
@@ -37,10 +37,12 @@ class UserBikeListAdapter(
             viewHolder.binding.userBikeCurrentLocation.text = location
 
             if (!bike.imagePath.isNullOrEmpty()){
-                Glide.with(context)
-                    .load(bike.imagePath)
-                    .centerCrop()
-                    .into(viewHolder.binding.bikeProfileImage)
+                if (context != null) {
+                    Glide.with(context)
+                        .load(bike.imagePath)
+                        .centerCrop()
+                        .into(viewHolder.binding.bikeProfileImage)
+                }
             }
 
         }
