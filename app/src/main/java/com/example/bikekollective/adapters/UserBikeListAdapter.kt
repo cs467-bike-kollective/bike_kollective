@@ -1,12 +1,16 @@
 package com.example.bikekollective.adapters
 
+import android.R
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.example.bikekollective.databinding.UserBikeItemBinding
 import com.example.bikekollective.models.Bike
+
 
 class UserBikeListAdapter(
     val context:Context,
@@ -31,6 +35,14 @@ class UserBikeListAdapter(
             viewHolder.binding.userBikeDescription.text = description
             viewHolder.binding.userBikeCombo.text = combination
             viewHolder.binding.userBikeCurrentLocation.text = location
+
+            if (!bike.imagePath.isNullOrEmpty()){
+                Glide.with(context)
+                    .load(bike.imagePath)
+                    .centerCrop()
+                    .into(viewHolder.binding.bikeProfileImage)
+            }
+
         }
 
 

@@ -164,6 +164,7 @@ class CreateBikeActivity : AppCompatActivity() {
                             binding.bikeLockCombination.hint = "Combination"
                             Glide.with(baseContext)
                                 .load(R.drawable.click_to_take_photo)
+                                .centerCrop()
                                 .into(binding.bikeImage)
 
                             //clear data on form and re-enable button
