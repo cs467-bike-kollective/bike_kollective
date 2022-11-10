@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     companion object {
-        private val TAG = "MainActivity"
+        private const val TAG = "MainActivity"
     }
 
 
@@ -41,7 +41,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.userBikeList))
 
         bottomNavigationView.setupWithNavController(navController)
+        if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
+            (applicationContext as ApplicationContext).queryBikeTags()
 
+        }
+        if ((applicationContext as ApplicationContext).userBikeList.isNullOrEmpty()){
+            (applicationContext as ApplicationContext).queryUserBikes()
+
+        }
 
     }
 

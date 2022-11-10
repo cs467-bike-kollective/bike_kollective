@@ -1,10 +1,13 @@
 package com.example.bikekollective
+import android.content.Context
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.bikekollective.databinding.ActivityEditBikeBinding
 import android.graphics.Color
 import android.content.Intent
+import com.example.bikekollective.databinding.ChipBinding
+import com.google.android.material.chip.Chip
 
 class EditBikeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditBikeBinding
@@ -20,6 +23,14 @@ class EditBikeActivity : AppCompatActivity() {
 
         // hide action bar
         supportActionBar?.hide()
+        if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
+            (applicationContext as ApplicationContext).queryUserBikes()
+        }else{
+            (applicationContext as ApplicationContext).bikeTagList?.forEach{ tag ->
+                binding.editChipGroup.addView(createTagChip(baseContext, tag?.name.toString()))
+            }
+
+        }
 
         binding.editSubmitFormButton.setOnClickListener {
             //disable button to prevent multiple clicks
@@ -47,5 +58,12 @@ class EditBikeActivity : AppCompatActivity() {
         binding.editIvExitCamera.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
+    }
+
+    private fun createTagChip(baseContext: Context?, tagString: String): Chip {
+        val chip = ChipBinding.inflate(layoutInflater).root
+        chip.text = tagString
+        return chip
+
     }
 }

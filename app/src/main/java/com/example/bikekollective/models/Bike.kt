@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @IgnoreExtraProperties
 data class Bike(
-    var ownerId: String? = null,
+    @get:PropertyName("owner_id") @set:PropertyName("owner_id")var ownerId: String? = null,
     @get:PropertyName("is_available") @set:PropertyName("is_available")var isAvailable: Boolean? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,

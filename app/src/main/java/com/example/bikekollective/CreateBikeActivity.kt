@@ -1,6 +1,7 @@
 package com.example.bikekollective
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -13,7 +14,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
+import com.example.bikekollective.databinding.ChipBinding
 import com.example.bikekollective.models.Bike
+import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -38,12 +41,15 @@ class CreateBikeActivity : AppCompatActivity() {
 
 
     private val resultLauncherCameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        binding.tvChoosePhoto.visibility = View.INVISIBLE
         Log.i("TAG", "HERE")
         if (result.resultCode == Activity.RESULT_OK) {
             // There are no request codes
             val data: Intent? = result.data
 
-            photoUri = data?.extras?.get("imageUri") as Uri
+            photoUri = Uri.parse( data?.extras?.getString("imageUri"))
+
+
 
             if (photoUri != null){
                 Glide.with(baseContext)
@@ -68,8 +74,23 @@ class CreateBikeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        //ensure that tags aren't null and add chip choices
+        if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
+            (applicationContext as ApplicationContext).queryBikeTags()
+        }else{
+            (applicationContext as ApplicationContext).bikeTagList?.forEach{ tag ->
+                binding.chipGroup.addView(createTagChip(baseContext, tag?.name.toString()))
+            }
+
+        }
+        binding.progressBar.visibility = View.GONE
+
         // hide action bar
         supportActionBar?.hide();
+
+        binding.bikeLocation.setOnClickListener {
+            startActivity(Intent(this, PickLocationMapsActivity::class.java))
+        }
 
         binding.ivExitCreateBike.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
@@ -79,6 +100,7 @@ class CreateBikeActivity : AppCompatActivity() {
             openCameraForResult()
         }
         binding.submitFormButton.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
             val userID = auth.currentUser?.uid.toString()
             var missingFields = false
             //create temp lat and long
@@ -142,18 +164,22 @@ class CreateBikeActivity : AppCompatActivity() {
                             binding.bikeLockCombination.hint = "Combination"
                             Glide.with(baseContext)
                                 .load(R.drawable.click_to_take_photo)
+                                .centerCrop()
                                 .into(binding.bikeImage)
 
                             //clear data on form and re-enable button
                             binding.bikeDescription.text.clear()
                             binding.bikeLockCombination.text.clear()
                             binding.submitFormButton.isEnabled = true
+                            binding.progressBar.visibility = View.INVISIBLE
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }.addOnFailureListener {
-
+                            binding.submitFormButton.isEnabled = true
+                            binding.progressBar.visibility = View.INVISIBLE
                         }
                         binding.submitFormButton.isEnabled = true
+                        binding.progressBar.visibility = View.INVISIBLE
 
                     }
             }
@@ -161,10 +187,20 @@ class CreateBikeActivity : AppCompatActivity() {
 
 
             binding.submitFormButton.isEnabled = true
+            binding.progressBar.visibility = View.INVISIBLE
 
 
         }
     }
+
+    private fun createTagChip(baseContext: Context?, tagString: String): Chip {
+
+        val chip = ChipBinding.inflate(layoutInflater).root
+        chip.text = tagString
+        return chip
+
+    }
+
     private fun openCameraForResult() {
         val intentCameraActivity = Intent(this, CameraActivity::class.java)
         intentCameraActivity.putExtra("identifier", CREATE_BIKE_IDENTIFIER)
