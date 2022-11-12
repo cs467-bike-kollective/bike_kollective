@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.children
 import com.bumptech.glide.Glide
 import com.example.bikekollective.databinding.ActivityCreateBikeBinding
 import com.example.bikekollective.databinding.ChipBinding
@@ -30,6 +31,7 @@ class CreateBikeActivity : AppCompatActivity() {
     private var longitude: Double? = null
     private var latitude: Double? = null
     private var photoUri: Uri? = null
+    private var chosenTagList: ArrayList<String>? = null
 
     private lateinit var firebaseStorage: StorageReference
     private val db = Firebase.firestore
@@ -48,8 +50,6 @@ class CreateBikeActivity : AppCompatActivity() {
             val data: Intent? = result.data
 
             photoUri = Uri.parse( data?.extras?.getString("imageUri"))
-
-
 
             if (photoUri != null){
                 Glide.with(baseContext)
@@ -99,10 +99,22 @@ class CreateBikeActivity : AppCompatActivity() {
         binding.bikeImage.setOnClickListener {
             openCameraForResult()
         }
+
+
+       // reference https://stackoverflow.com/questions/58224630/how-to-get-selected-chips-from-chipgroup
         binding.submitFormButton.setOnClickListener {
+
             binding.progressBar.visibility = View.VISIBLE
             val userID = auth.currentUser?.uid.toString()
             var missingFields = false
+
+            //get tags chosen
+            if (binding.chipGroup.childCount > 0) {
+                chosenTagList = arrayListOf()
+                binding.chipGroup.children.toList().filter { (it as Chip).isChecked }.forEach {
+                    chosenTagList?.add((it as Chip).text.toString())
+                }
+            }
             //create temp lat and long
             latitude = ThreadLocalRandom.current().nextDouble(33.0, 34.351711,);
             longitude = ThreadLocalRandom.current().nextDouble(-118.654626,  -118.046890);
@@ -150,10 +162,13 @@ class CreateBikeActivity : AppCompatActivity() {
                             0.0,
                             0,
                             0.0,
-                            null,
-                            ""
+                            chosenTagList,
+
                         )
-                        db.collection("bikes").add(bike).addOnSuccessListener {
+
+                        db.collection("bikes").add(bike).addOnSuccessListener { it ->
+
+                            bike.documentId = it.id
                             Toast.makeText(
                             baseContext,
                             "Bike Added.",

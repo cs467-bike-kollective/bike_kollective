@@ -18,7 +18,7 @@ data class Bike(
     @get:PropertyName("number_of_ratings") @set:PropertyName("number_of_ratings")var numberOfRatings: Int? = null,
     @get:PropertyName("average_rating") @set:PropertyName("average_rating") var averageRating: Double? = null,
     var tags: ArrayList<String>? = null,
-    @Exclude @DocumentId val documentId: String? = ""
+    @Exclude @DocumentId var documentId: String? = ""
 ):Parcelable{
     @Exclude
     fun toMap(): Map<String, Any?> {
