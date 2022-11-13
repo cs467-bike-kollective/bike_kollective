@@ -2,12 +2,14 @@ package com.example.bikekollective.adapters
 
 import android.R
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import com.example.bikekollective.EditBikeActivity
 import com.example.bikekollective.databinding.UserBikeItemBinding
 import com.example.bikekollective.models.Bike
 
@@ -23,6 +25,7 @@ class UserBikeListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserBikeListAdapter.ViewHolder {
         val binding = UserBikeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
     }
 
@@ -35,6 +38,11 @@ class UserBikeListAdapter(
             viewHolder.binding.userBikeDescription.text = description
             viewHolder.binding.userBikeCombo.text = combination
             viewHolder.binding.userBikeCurrentLocation.text = location
+
+            viewHolder.binding.userBikeContainer.setOnClickListener{
+                var intent = Intent(context, EditBikeActivity::class.java)
+                context?.startActivity(intent)
+            }
 
             if (!bike.imagePath.isNullOrEmpty()){
                 if (context != null) {
@@ -53,4 +61,5 @@ class UserBikeListAdapter(
     override fun getItemCount(): Int {
        return userBikeList?.size ?: 0
     }
+
 }

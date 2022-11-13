@@ -167,8 +167,12 @@ class CreateBikeActivity : AppCompatActivity() {
                         )
 
                         db.collection("bikes").add(bike).addOnSuccessListener { it ->
-
+                            //add bike ID
                             bike.documentId = it.id
+
+                            //add bike to global data
+                            (applicationContext as ApplicationContext).userBikeList?.add(bike)
+
                             Toast.makeText(
                             baseContext,
                             "Bike Added.",
@@ -187,6 +191,7 @@ class CreateBikeActivity : AppCompatActivity() {
                             binding.bikeLockCombination.text.clear()
                             binding.submitFormButton.isEnabled = true
                             binding.progressBar.visibility = View.INVISIBLE
+
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }.addOnFailureListener {

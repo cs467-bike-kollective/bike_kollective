@@ -1,5 +1,6 @@
 package com.example.bikekollective
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +12,6 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
         this.onSignInResult(res)
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -40,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         updateUI(user)
 
     }
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // initialize Firebase Auth
@@ -69,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             Log.w(TAG, "Result ok")
             // Successfully signed in
-            val user = FirebaseAuth.getInstance().currentUser
+
 
             if (result?.idpResponse?.isNewUser == true){
                 Log.w(TAG, "new user")

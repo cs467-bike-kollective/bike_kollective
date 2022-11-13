@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.bikekollective.databinding.ActivityEditBikeBinding
 import android.graphics.Color
 import android.content.Intent
+import android.view.View
 import com.example.bikekollective.databinding.ChipBinding
 import com.google.android.material.chip.Chip
 
@@ -23,6 +24,7 @@ class EditBikeActivity : AppCompatActivity() {
 
         // hide action bar
         supportActionBar?.hide()
+        binding.editProgressBar.visibility = View.GONE
         if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
             (applicationContext as ApplicationContext).queryUserBikes()
         }else{

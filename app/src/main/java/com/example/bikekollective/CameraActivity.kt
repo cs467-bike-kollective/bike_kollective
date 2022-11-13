@@ -57,6 +57,7 @@ class CameraActivity : AppCompatActivity() {
 
                 setResult(Activity.RESULT_OK, intentCreateBikeActivity)
                 finish()
+
             }
         } else {
             Log.d("PhotoPicker", "No media selected")
