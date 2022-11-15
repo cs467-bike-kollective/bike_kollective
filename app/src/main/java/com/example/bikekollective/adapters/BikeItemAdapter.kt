@@ -1,13 +1,64 @@
-package com.example.bikekollective
+package com.example.bikekollective.adapters
 
 import android.content.Context
-import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CursorAdapter
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide // for images
+
+import com.example.bikekollective.databinding.SearchBikeItemBinding
+
+import com.example.bikekollective.models.Bike
+
+
+class BikeItemAdapter(
+    val context:Context?,
+    private var userBikeList: MutableList<Bike?>?
+
+) : RecyclerView.Adapter<BikeItemAdapter.ViewHolder>(){
+
+
+    inner class ViewHolder(val binding: SearchBikeItemBinding): RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BikeItemAdapter.ViewHolder {
+        val binding = SearchBikeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val bike : Bike? = userBikeList?.get(position)
+        if (bike != null) {
+            val ratings = "Ratings: \n ${bike.ratingTotal}"
+            val isAvailable = "Availability: \n${bike.ratingTotal}"
+            val description = "Description:\n ${bike.description}"
+            val combination = "Combination: ${bike.combination}"
+            val location = "Location: ${bike.latitude}, ${bike.longitude}"
+            val tags = "Tags: ${bike.tags}"
+
+            // bind the text to the view
+            viewHolder.binding.searchBikeRatings.text = ratings
+            viewHolder.binding.searchBikeAvailable.text = isAvailable
+            viewHolder.binding.searchBikeDescription.text = description
+            viewHolder.binding.searchBikeLocation.text = location
+            viewHolder.binding.searchBikeCombo.text = combination
+            viewHolder.binding.searchBikeTags.text = tags
+
+            // images for the bike
+            if (!bike.imagePath.isNullOrEmpty()){
+                if (context != null) {
+                    Glide.with(context)
+                        .load(bike.imagePath)
+                        .centerCrop()
+                        .into(viewHolder.binding.searchBikeImage)
+                }
+            }
+
+        }
+
+
+    }
+
+    override fun getItemCount(): Int {
+        return userBikeList?.size ?: 0
+    }
+}

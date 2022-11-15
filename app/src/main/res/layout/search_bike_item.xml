@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/bike_profile_image"
+        android:id="@+id/search_bike_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/blue_bike_sport"
@@ -18,31 +17,52 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/user_bike_current_location"
+        android:id="@+id/search_bike_ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:text="Ratings: "
+        app:layout_constraintStart_toStartOf="@+id/search_bike_image"
+        app:layout_constraintTop_toBottomOf="@+id/search_bike_image" />
+
+    <TextView
+        android:id="@+id/search_bike_available"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available:"
+        app:layout_constraintStart_toStartOf="@+id/search_bike_image"
+        app:layout_constraintTop_toBottomOf="@+id/search_bike_ratings" />
+
+    <TextView
+        android:id="@+id/search_bike_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/current_location"
-        app:layout_constraintStart_toStartOf="@+id/bike_profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/bike_profile_image" />
+        app:layout_constraintStart_toStartOf="@+id/search_bike_image"
+        app:layout_constraintTop_toBottomOf="@+id/search_bike_available" />
 
     <TextView
-        android:id="@+id/user_bike_description"
+        android:id="@+id/search_bike_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Description:"
-        app:layout_constraintStart_toStartOf="@+id/user_bike_current_location"
-        app:layout_constraintTop_toBottomOf="@+id/user_bike_current_location" />
+        app:layout_constraintStart_toStartOf="@+id/search_bike_location"
+        app:layout_constraintTop_toBottomOf="@+id/search_bike_location" />
 
     <TextView
-        android:id="@+id/user_bike_combo"
+        android:id="@+id/search_bike_combo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Combination:"
-        app:layout_constraintStart_toStartOf="@+id/user_bike_description"
-        app:layout_constraintTop_toBottomOf="@+id/user_bike_description" />
+        app:layout_constraintStart_toStartOf="@+id/search_bike_description"
+        app:layout_constraintTop_toBottomOf="@+id/search_bike_description" />
+
+    <TextView
+        android:id="@+id/search_bike_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tags: "
+        app:layout_constraintStart_toStartOf="@+id/search_bike_image"
+        app:layout_constraintTop_toBottomOf="@+id/search_bike_combo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
