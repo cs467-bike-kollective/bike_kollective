@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".BikeProfileActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profile_toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/profile_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:padding="20dp"
+            app:srcCompat="@drawable/ic_close_black"
+            tools:layout_editor_absoluteX="302dp"
+            tools:layout_editor_absoluteY="13dp"
+            android:contentDescription="close bike profile"
+            tools:ignore="HardcodedText" />
+    </androidx.appcompat.widget.Toolbar>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="312dp"
