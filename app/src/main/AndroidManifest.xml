@@ -10,6 +10,7 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="31"
         tools:ignore="ScopedStorage" />
+
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="${MAPS_API_KEY}" />
@@ -24,6 +25,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BikeKollective"
         tools:targetApi="31">
+        <activity
+            android:name=".BikeProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".ReturnBikeActivity"
             android:exported="false">
