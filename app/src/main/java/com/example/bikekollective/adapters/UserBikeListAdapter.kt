@@ -41,6 +41,7 @@ class UserBikeListAdapter(
 
             viewHolder.binding.userBikeContainer.setOnClickListener{
                 var intent = Intent(context, EditBikeActivity::class.java)
+                intent.putExtra("bike", bike)
                 context?.startActivity(intent)
             }
 

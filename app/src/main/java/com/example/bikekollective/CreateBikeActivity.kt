@@ -74,6 +74,10 @@ class CreateBikeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        binding.bikeLocation.setOnClickListener {
+            startActivity(Intent(this, PickLocationMapsActivity::class.java))
+        }
+
         //ensure that tags aren't null and add chip choices
         if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
             (applicationContext as ApplicationContext).queryBikeTags()

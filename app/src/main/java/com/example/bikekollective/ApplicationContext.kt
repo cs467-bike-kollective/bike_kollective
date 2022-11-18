@@ -42,7 +42,6 @@ class ApplicationContext: Application() {
             .get().addOnSuccessListener { snapshot ->
                 userBikeList = snapshot.toObjects(Bike::class.java)
 
-
         }
         Log.i(TAG, "HERE" + userBikeList.toString())
 

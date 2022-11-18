@@ -42,8 +42,8 @@ class CameraActivity : AppCompatActivity() {
         private const val REQUEST_CODE_PERMISSIONS = 2022
         private val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
         private val FROM_ADD_BIKE_CODE = 1001
-        private val PERMISSION_CODE_ALBUM = 5001;
-//        val REQUIRED_PERMISSIONS_ALBUM = arrayOf(android.Manifest.permission.)
+        private const val FROM_EDIT_BIKE_CODE = 5555
+
 
     }
     val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
@@ -59,6 +59,11 @@ class CameraActivity : AppCompatActivity() {
                 finish()
 
             }
+        } else if(destination == FROM_EDIT_BIKE_CODE){
+            var intentEditBikeActivity = Intent()
+            intentEditBikeActivity.putExtra("imageUri", uri.toString())
+            setResult(Activity.RESULT_OK, intentEditBikeActivity)
+            finish()
         } else {
             Log.d("PhotoPicker", "No media selected")
         }
