@@ -201,6 +201,7 @@ class CreateBikeActivity : AppCompatActivity() {
                         }.addOnFailureListener {
                             binding.submitFormButton.isEnabled = true
                             binding.progressBar.visibility = View.INVISIBLE
+
                         }
                         binding.submitFormButton.isEnabled = true
                         binding.progressBar.visibility = View.INVISIBLE
