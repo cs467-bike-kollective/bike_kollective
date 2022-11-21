@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/user_bike_container"
     android:layout_width="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp"
+    android:padding="20dp"
+    android:layout_margin="1dp"
+    android:background="@drawable/bike_item_border"
     android:layout_height="wrap_content">
 
     <ImageView
