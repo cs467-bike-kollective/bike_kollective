@@ -6,20 +6,19 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
-
 import androidx.core.content.ContextCompat
 import com.example.bikekollective.databinding.ActivityCameraBinding
 import java.io.File
@@ -33,7 +32,7 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
-    private var destination: Int? = null
+
     private lateinit var outPutDirectory: File
 
     companion object {
@@ -41,8 +40,7 @@ class CameraActivity : AppCompatActivity() {
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 2022
         private val REQUIRED_PERMISSIONS_CAMERA = arrayOf(Manifest.permission.CAMERA)
-        private val FROM_ADD_BIKE_CODE = 1001
-        private const val FROM_EDIT_BIKE_CODE = 5555
+
 
 
     }
@@ -51,19 +49,13 @@ class CameraActivity : AppCompatActivity() {
         // photo picker.
         if (uri != null) {
             Log.d("PhotoPicker", "Selected URI: $uri")
-            if (destination == FROM_ADD_BIKE_CODE){
-                var intentCreateBikeActivity = Intent()
-                intentCreateBikeActivity.putExtra("imageUri", uri.toString())
 
-                setResult(Activity.RESULT_OK, intentCreateBikeActivity)
+                var returnURI = Intent()
+                returnURI.putExtra("imageUri", uri.toString())
+
+                setResult(Activity.RESULT_OK, returnURI)
                 finish()
 
-            }
-        } else if(destination == FROM_EDIT_BIKE_CODE){
-            var intentEditBikeActivity = Intent()
-            intentEditBikeActivity.putExtra("imageUri", uri.toString())
-            setResult(Activity.RESULT_OK, intentEditBikeActivity)
-            finish()
         } else {
             Log.d("PhotoPicker", "No media selected")
         }
@@ -75,7 +67,6 @@ class CameraActivity : AppCompatActivity() {
         binding = ActivityCameraBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        destination = intent.getIntExtra("identifier", 1)
 
 //        // hide action bar
         supportActionBar?.hide();
@@ -83,7 +74,9 @@ class CameraActivity : AppCompatActivity() {
 
         binding.ivExitCamera.setOnClickListener {
             //todo check if it's from create bike activity
-            startActivity(Intent(this, CreateBikeActivity::class.java))
+            val returnIntent = Intent()
+            setResult(Activity.RESULT_CANCELED, returnIntent)
+            finish()
         }
 
         // Request camera permissions
@@ -168,14 +161,16 @@ class CameraActivity : AppCompatActivity() {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
-                    if (destination == FROM_ADD_BIKE_CODE){
-                        var intentCreateBikeActivity = Intent()
-                        intentCreateBikeActivity.putExtra("imageUri", output.savedUri.toString())
 
-                        setResult(Activity.RESULT_OK, intentCreateBikeActivity)
-                        finish()
+                    var returnURI = Intent()
+                    returnURI.putExtra("imageUri", output.savedUri.toString())
 
-                    }
+                    setResult(Activity.RESULT_OK, returnURI)
+                    finish()
+
+
+
+
 
                 }
             }
@@ -223,10 +218,7 @@ class CameraActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(
             baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
-//    private fun albumPermissionGranted() = REQUIRED_PERMISSIONS_ALBUM.all {
-//        ContextCompat.checkSelfPermission(
-//            baseContext, it) == PackageManager.PERMISSION_GRANTED
-//    }
+
 
     override fun onDestroy() {
         super.onDestroy()

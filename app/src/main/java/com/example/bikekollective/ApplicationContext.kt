@@ -41,6 +41,7 @@ class ApplicationContext: Application() {
         db.collection("bikes").whereEqualTo("owner_id", auth.currentUser?.uid.toString())
             .get().addOnSuccessListener { snapshot ->
                 userBikeList = snapshot.toObjects(Bike::class.java)
+                Log.i(TAG, userBikeList.toString())
 
         }
         Log.i(TAG, "HERE" + userBikeList.toString())

@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Parcelable
+import android.os.PersistableBundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.children
@@ -20,6 +21,7 @@ import com.example.bikekollective.databinding.ChipBinding
 import com.example.bikekollective.models.Bike
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
@@ -37,7 +39,6 @@ class EditBikeActivity : AppCompatActivity() {
     private var editTagList: ArrayList<String>? = null
     companion object {
         private const val TAG = "EditBikeActivity"
-        private const val EDIT_BIKE_IDENTIFIER = 5555
 
     }
     private val resultLauncherCameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -65,6 +66,7 @@ class EditBikeActivity : AppCompatActivity() {
         binding = ActivityEditBikeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        auth = Firebase.auth
 
         bike = if (SDK_INT >= 33) {
             intent.getParcelableExtra("bike", Bike::class.java)
@@ -73,6 +75,7 @@ class EditBikeActivity : AppCompatActivity() {
             intent.getParcelableExtra<Bike>("bike")
         }
 
+
         latitude = bike?.latitude
         longitude = bike?.longitude
         addDataToForm(bike)
@@ -80,6 +83,8 @@ class EditBikeActivity : AppCompatActivity() {
         // hide action bar
         supportActionBar?.hide()
         binding.editProgressBar.visibility = View.GONE
+
+        Log.i(TAG, (applicationContext as ApplicationContext).bikeTagList.toString())
         if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
             (applicationContext as ApplicationContext).queryUserBikes()
         }else{
@@ -136,6 +141,7 @@ class EditBikeActivity : AppCompatActivity() {
         }
     }
 
+
     private fun addDataToForm(bike: Bike?) {
         if (bike != null) {
             binding.editBikeDescription.setText(bike.description)
@@ -158,15 +164,17 @@ class EditBikeActivity : AppCompatActivity() {
     private fun createTagChip(baseContext: Context?, tagString: String): Chip {
         val chip = ChipBinding.inflate(layoutInflater).root
         chip.text = tagString
-        if (bike?.tags?.contains(tagString) == true){
+
+        Log.i(TAG, bike?.tag.toString())
+        if (bike?.tag?.contains(tagString) == true){
             chip.isChecked = true
+            Log.i(TAG, tagString)
         }
         return chip
 
     }
     private fun openCameraForResult() {
         val intentCameraActivity = Intent(this, CameraActivity::class.java)
-        intentCameraActivity.putExtra("identifier", EDIT_BIKE_IDENTIFIER)
         resultLauncherCameraActivity.launch(intentCameraActivity)
     }
 
@@ -195,7 +203,7 @@ class EditBikeActivity : AppCompatActivity() {
                 editTagList?.add((it as Chip).text.toString())
             }
         }
-        bike?.tags = editTagList
+        bike?.tag = editTagList
 
         db.collection("bikes").document(bike?.documentId.toString())
                 //todo update only the information changed and not the whole bike
@@ -215,7 +223,7 @@ class EditBikeActivity : AppCompatActivity() {
                         (applicationContext as ApplicationContext).userBikeList?.get(index)?.latitude = bike?.latitude
                         (applicationContext as ApplicationContext).userBikeList?.get(index)?.longitude = bike?.longitude
                         (applicationContext as ApplicationContext).userBikeList?.get(index)?.description = bike?.description
-                        (applicationContext as ApplicationContext).userBikeList?.get(index)?.tags = bike?.tags
+                        (applicationContext as ApplicationContext).userBikeList?.get(index)?.tag = bike?.tag
                     }
                 }
                 //  reset the input
@@ -230,7 +238,8 @@ class EditBikeActivity : AppCompatActivity() {
                 finish()
 
 
-            }.addOnFailureListener {
+            }.addOnFailureListener { e->
+                Log.e(TAG, e.message.toString())
                 binding.editSubmitFormButton.isEnabled = true
                 binding.editProgressBar.visibility = View.GONE
             }

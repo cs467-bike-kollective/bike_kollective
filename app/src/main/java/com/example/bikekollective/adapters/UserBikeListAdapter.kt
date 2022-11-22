@@ -4,6 +4,7 @@ import android.R
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,8 @@ import com.example.bikekollective.models.Bike
 
 class UserBikeListAdapter(
     val context:Context?,
-    var userBikeList: MutableList<Bike?>?
+    var userBikeList: MutableList<Bike?>?,
+
 
     ) : RecyclerView.Adapter<UserBikeListAdapter.ViewHolder>(){
 
@@ -42,6 +44,7 @@ class UserBikeListAdapter(
             viewHolder.binding.userBikeContainer.setOnClickListener{
                 var intent = Intent(context, EditBikeActivity::class.java)
                 intent.putExtra("bike", bike)
+                Log.i("AdapterA", bike.toString())
                 context?.startActivity(intent)
             }
 
