@@ -16,10 +16,10 @@
         android:layout_marginTop="12dp"
         android:layout_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name..."
@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="The bike was great to use, had no trouble riding it through the city"
         android:textSize="20dp"
+        android:id="@+id/rating_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />

@@ -45,5 +45,13 @@
         app:layout_constraintStart_toStartOf="@+id/user_bike_description"
         app:layout_constraintTop_toBottomOf="@+id/user_bike_description" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/bike_profile_image"
+        app:layout_constraintTop_toTopOf="@+id/bike_profile_image"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

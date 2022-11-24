@@ -3,6 +3,7 @@ package com.example.bikekollective
 import android.app.Application
 import android.util.Log
 import com.example.bikekollective.models.Bike
+import com.example.bikekollective.models.Ride
 import com.example.bikekollective.models.Tag
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -16,6 +17,8 @@ class ApplicationContext: Application() {
     private lateinit var db: FirebaseFirestore
     var userBikeList: MutableList<Bike?>? = null
     var bikeTagList: MutableList<Tag?>? = null
+    var currBike: Bike? = null
+    var currRide: Ride? = null
 
     companion object{
         private const val TAG = "ApplicationContext"
