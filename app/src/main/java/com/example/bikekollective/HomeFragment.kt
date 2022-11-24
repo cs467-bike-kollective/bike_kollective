@@ -18,8 +18,10 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
         }
+
     }
 
     override fun onCreateView(
@@ -27,6 +29,13 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        if((activity?.applicationContext as ApplicationContext).currBike == null){
+            (activity?.applicationContext as ApplicationContext).getCurrUserInfo()
+
+
+        }else{
+
+        }
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.logoutBtn.setOnClickListener {
             activity?.let { it1 ->

@@ -41,12 +41,20 @@ class UserBikeListAdapter(
             viewHolder.binding.userBikeCombo.text = combination
             viewHolder.binding.userBikeCurrentLocation.text = location
 
-            viewHolder.binding.userBikeContainer.setOnClickListener{
+            viewHolder.binding.editBike.setOnClickListener{
                 var intent = Intent(context, EditBikeActivity::class.java)
                 intent.putExtra("bike", bike)
                 Log.i("AdapterA", bike.toString())
                 context?.startActivity(intent)
             }
+
+
+//            viewHolder.binding.userBikeContainer.setOnClickListener{
+//                var intent = Intent(context, EditBikeActivity::class.java)
+//                intent.putExtra("bike", bike)
+//                Log.i("AdapterA", bike.toString())
+//                context?.startActivity(intent)
+//            }
 
             if (!bike.imagePath.isNullOrEmpty()){
                 if (context != null) {
