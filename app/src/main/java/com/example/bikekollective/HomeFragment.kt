@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import com.example.bikekollective.databinding.FragmentHomeBinding
 import com.example.bikekollective.databinding.FragmentUserBikeListBinding
 import com.firebase.ui.auth.AuthUI
@@ -21,6 +22,7 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+
     }
 
     override fun onCreateView(
@@ -41,6 +43,9 @@ class HomeFragment : Fragment() {
                         requireActivity().finish()
                     }
             }
+        }
+        binding.returnBikeBut.setOnClickListener {
+            startActivity(Intent(context, ReturnBikeActivity::class.java))
         }
         return binding.root
 
