@@ -1,5 +1,4 @@
 package com.example.bikekollective
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import com.bumptech.glide.Glide
+import android.widget.Button
+
 import com.example.bikekollective.databinding.FragmentHomeBinding
 import com.example.bikekollective.databinding.FragmentUserBikeListBinding
 import com.example.bikekollective.models.Bike
@@ -39,9 +41,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        db = Firebase.firestore
-//        auth = Firebase.auth
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         showBorrowedBike()
         binding.logoutBtn.setOnClickListener {
@@ -56,6 +56,10 @@ class HomeFragment : Fragment() {
                         requireActivity().finish()
                     }
             }
+        }
+
+        binding.returnBikeBut.setOnClickListener {
+            startActivity(Intent(context, ReturnBikeActivity::class.java))
         }
 
         return binding.root
