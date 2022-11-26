@@ -19,9 +19,7 @@ class ApplicationContext: Application() {
     private lateinit var db: FirebaseFirestore
     var userBikeList: MutableList<Bike?>? = null
     var bikeTagList: MutableList<Tag?>? = null
-    var currBike: Bike? = null
-    var currRide: Ride? = null
-    var currUser: User? = null
+
 
     companion object{
         private const val TAG = "ApplicationContext"
@@ -34,9 +32,12 @@ class ApplicationContext: Application() {
         auth = Firebase.auth
 
         queryBikeTags()
-        if (auth.currentUser != null){
-            getCurrUserInfo()
-        }
+
+
+//        if (auth.currentUser != null){
+////            Log.i(TAG, "curr user" + auth.currentUser.toString())
+//            getCurrUserInfo()
+//        }
 
     }
 
@@ -60,22 +61,40 @@ class ApplicationContext: Application() {
     fun addBike(newBike: Bike){
         userBikeList?.add(newBike)
     }
-    fun getCurrUserInfo(){
-        db.collection("users").document( auth.currentUser?.uid.toString())
-            .get().addOnSuccessListener { snapshot ->
-                currUser = snapshot.toObject(User::class.java)
-                if (currUser != null){
-                    if (!currUser!!.borrowedBike.isNullOrEmpty()){
-                        db.collection("bikes").document(currUser?.borrowedBike.toString())
-                            .get().addOnSuccessListener { snapshot ->
-                                currBike = snapshot.toObject(Bike::class.java)
-
-                        }
-                    }
-                }
-
-        }
-    }
+//    fun getCurrUserBike():Bike?{
+//        db.collection("users").document( auth.currentUser?.uid.toString())
+//            .get().addOnSuccessListener { snapshot ->
+//               var currUser = snapshot.toObject(User::class.java)
+//                if (currUser != null){
+//                    if (!currUser!!.borrowedBike.isNullOrEmpty()){
+//                        db.collection("bikes").document(currUser?.borrowedBike.toString())
+//                            .get().addOnSuccessListener { snapshot ->
+//                               var  currBike = snapshot.toObject(Bike::class.java)
+//
+//
+//                        }
+//                    }
+//                }
+//
+//        }
+//    }
+//    fun getCurrUserInfo(){
+//        db.collection("users").document( auth.currentUser?.uid.toString())
+//            .get().addOnSuccessListener { snapshot ->
+//                var currUser = snapshot.toObject(User::class.java)
+//                if (currUser != null){
+//                    if (!currUser!!.borrowedBike.isNullOrEmpty()){
+//                        db.collection("bikes").document(currUser?.borrowedBike.toString())
+//                            .get().addOnSuccessListener { snapshot ->
+//                                var  currBike = snapshot.toObject(Bike::class.java)
+//                                Log.i(TAG,  currBike.toString())
+//
+//                            }
+//                    }
+//                }
+//
+//            }
+//    }
 
 }
 
