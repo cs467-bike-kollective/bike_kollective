@@ -97,7 +97,7 @@ class CreateBikeActivity : AppCompatActivity() {
         }
 
         binding.ivExitCreateBike.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         binding.bikeImage.setOnClickListener {

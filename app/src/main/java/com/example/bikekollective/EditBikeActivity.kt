@@ -125,6 +125,8 @@ class EditBikeActivity : AppCompatActivity() {
             if (!missingFields){
                 if (newImage){
                     updateBikeAndImage(userID)
+                }else{
+                    updateBike()
                 }
             }
 
@@ -137,7 +139,8 @@ class EditBikeActivity : AppCompatActivity() {
         }
 
         binding.editIvExitCamera.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+//            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 
@@ -204,6 +207,8 @@ class EditBikeActivity : AppCompatActivity() {
             }
         }
         bike?.tag = editTagList
+        Log.i(TAG, "tagged " + bike?.tag.toString())
+        Log.i(TAG, "tagged " +editTagList.toString())
 
         db.collection("bikes").document(bike?.documentId.toString())
                 //todo update only the information changed and not the whole bike
@@ -214,6 +219,7 @@ class EditBikeActivity : AppCompatActivity() {
                     "image_path" to bike?.imagePath,
                     "latitude" to bike?.latitude,
                     "longitude" to bike?.longitude,
+                    "tag" to editTagList
                     )).addOnSuccessListener {
 
                 (applicationContext as ApplicationContext).userBikeList?.forEachIndexed { index, bikeItem ->
@@ -234,7 +240,7 @@ class EditBikeActivity : AppCompatActivity() {
                 binding.editSubmitFormButton.isEnabled = true
                 binding.editProgressBar.visibility = View.INVISIBLE
 
-                startActivity(Intent(this, MainActivity::class.java))
+//                startActivity(Intent(this, MainActivity::class.java))
                 finish()
 
 

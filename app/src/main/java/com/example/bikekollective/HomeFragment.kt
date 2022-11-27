@@ -1,10 +1,13 @@
 package com.example.bikekollective
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 
 import com.bumptech.glide.Glide
@@ -62,6 +65,7 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context, ReturnBikeActivity::class.java))
         }
 
+        binding.borrowedBikeCombination.visibility = GONE
         return binding.root
 
     }
@@ -71,9 +75,11 @@ class HomeFragment : Fragment() {
                 var currUser = snapshot.toObject(User::class.java)
                 if (currUser != null) {
                     if (!currUser!!.borrowedBike.isNullOrEmpty()) {
+                        binding.returnBikeBut.visibility = VISIBLE
                         db.collection("bikes").document(currUser?.borrowedBike.toString())
                             .get().addOnSuccessListener { snapshot ->
                                 var bike = snapshot.toObject(Bike::class.java)
+                                binding.borrowedBikeCombination.text = "Combination: ${bike?.combination}"
                                 if (!bike?.imagePath.isNullOrEmpty()) {
                                     Glide.with(requireActivity().baseContext)
                                         .load(bike?.imagePath.toString())
@@ -86,8 +92,13 @@ class HomeFragment : Fragment() {
                                         .into(binding.bikeImage)
                                 }
 
-
                             }
+                    }else{
+                        Glide.with(requireActivity().baseContext)
+                            .load(R.drawable.no_curr_bike)
+                            .centerCrop()
+                            .into(binding.bikeImage)
+                        binding.returnBikeBut.visibility = GONE
                     }
                 }
 

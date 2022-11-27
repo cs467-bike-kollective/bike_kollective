@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import com.example.bikekollective.BikeProfileActivity
 import com.example.bikekollective.EditBikeActivity
 import com.example.bikekollective.databinding.UserBikeItemBinding
 import com.example.bikekollective.models.Bike
@@ -49,12 +50,12 @@ class UserBikeListAdapter(
             }
 
 
-//            viewHolder.binding.userBikeContainer.setOnClickListener{
-//                var intent = Intent(context, EditBikeActivity::class.java)
-//                intent.putExtra("bike", bike)
-//                Log.i("AdapterA", bike.toString())
-//                context?.startActivity(intent)
-//            }
+            viewHolder.binding.userBikeContainer.setOnClickListener{
+                var intent = Intent(context, BikeProfileActivity::class.java)
+                intent.putExtra("bike", bike)
+                Log.i("AdapterA", bike.toString())
+                context?.startActivity(intent)
+            }
 
             if (!bike.imagePath.isNullOrEmpty()){
                 if (context != null) {
