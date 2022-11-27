@@ -22,7 +22,6 @@ import com.google.firebase.storage.StorageReference
 
 class BikeProfileActivity : AppCompatActivity() {
     private var bike: Bike? = null
-    private lateinit var firebaseStorage: StorageReference
     private lateinit var db : FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityBikeProfileBinding
@@ -65,16 +64,18 @@ class BikeProfileActivity : AppCompatActivity() {
             Glide.with(baseContext)
                 .load(bike?.imagePath.toString())
                 .centerCrop()
-                .into(binding.bikeProflileImage)
+                .into(binding.bikeProfileImageView)
         } else {
             Glide.with(baseContext)
                 .load(R.drawable.no_image_curr_bike)
                 .centerCrop()
-                .into(binding.bikeProflileImage)
+                .into(binding.bikeProfileImageView)
         }
         binding.bikeProfileRating.rating = bike?.averageRating?.toFloat() ?: 0.0f
         binding.bikeProfileDescription.text = "Description: ${bike?.description}"
         binding.bikeProfileLocation.text = "Location: ${bike?.latitude}, ${bike?.longitude}"
+        var averageRating = String.format("%.1f", bike?.averageRating).toDouble()
+        binding.reviewNumber.text = "${averageRating}/5 ( ${bike?.numberOfRatings.toString()} ratings)"
         binding.buttonCheckout.setOnClickListener {
             if (currUser?.borrowedBike.isNullOrEmpty()){
                 var toCheckout =  Intent(this,CheckoutActivity::class.java)

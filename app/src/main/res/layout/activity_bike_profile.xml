@@ -30,41 +30,35 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
-        android:id="@+id/bike_proflile_image"
+        android:id="@+id/bike_profile_image_view"
         android:layout_width="312dp"
         android:layout_height="223dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="picture of bike"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143"
+        app:layout_constraintTop_toBottomOf="@+id/profile_toolbar2"
         app:srcCompat="@drawable/blue_bike_sport"
-        android:contentDescription="picture of bike"
         tools:ignore="HardcodedText" />
 
     <RatingBar
         android:id="@+id/bike_profile_rating"
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bike_proflile_image"
-        app:layout_constraintVertical_bias="0.079" />
+        app:layout_constraintTop_toBottomOf="@+id/bike_profile_image_view" />
 
     <TextView
         android:id="@+id/bike_profile_description"
         android:layout_width="303dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:text="Description"
-        app:layout_constraintBottom_toTopOf="@+id/bike_profile_location"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947"
+        app:layout_constraintTop_toBottomOf="@+id/review_number"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -73,26 +67,33 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#A6A5A5"
         android:text="Checkout"
+        android:layout_marginTop="30dp"
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.891"
+        app:layout_constraintTop_toBottomOf="@+id/bike_profile_location"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/bike_profile_location"
         android:layout_width="305dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:text="Location"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.717"
+        app:layout_constraintTop_toBottomOf="@+id/bike_profile_description"
         tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/review_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="0 reviews"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bike_profile_rating" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

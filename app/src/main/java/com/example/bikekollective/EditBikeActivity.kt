@@ -149,8 +149,10 @@ class EditBikeActivity : AppCompatActivity() {
         if (bike != null) {
             binding.editBikeDescription.setText(bike.description)
             binding.editBikeLockCombination.setText(bike.combination)
-            val location = "Location: ${bike.latitude}, ${bike.longitude}"
-            binding.editBikeLocation.setText(location)
+            var latString = String.format("%.3f", bike.latitude).toDouble()
+            var longString = String.format("%.3f", bike.longitude).toDouble()
+            val location = "Location: ${latString}, ${longString}"
+            binding.editBikeLocation.text = location
             if (!bike.imagePath.isNullOrEmpty()){
                 Glide.with(baseContext)
                     .load(bike.imagePath)
