@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide // for images
 import com.example.bikekollective.databinding.SearchBikeItemBinding
 
 import com.example.bikekollective.models.Bike
+import java.text.DecimalFormat
 
 
 class BikeItemAdapter(
@@ -28,9 +29,21 @@ class BikeItemAdapter(
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val bike : Bike? = userBikeList?.get(position)
         if (bike != null) {
-            val ratings = "Ratings: \n ${bike.ratingTotal}"
-            val isAvailable = "Availability: \n${bike.ratingTotal}"
-            val description = "Description:\n ${bike.description}"
+            var bikeAvailable : String = "Yes"
+
+            // parse the geocoding
+            val latitude = bike.latitude
+            val longitude = bike.longitude
+
+            val availability = bike.isAvailable
+            if (availability == false) {
+                bikeAvailable = "No"
+            }
+
+            val ratings = "Ratings: ${String.format(("%.2f"), (bike.ratingTotal!!/ bike.numberOfRatings!!))}"
+            // String.format(("%.2f"), rating)
+            val isAvailable = "Available: $bikeAvailable"
+            val description = "Description: ${bike.description}"
             val combination = "Combination: ${bike.combination}"
             val location = "Location: ${bike.latitude}, ${bike.longitude}"
             val tags = "Tags: ${bike.tags}"
