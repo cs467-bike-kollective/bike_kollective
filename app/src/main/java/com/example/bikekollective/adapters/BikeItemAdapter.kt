@@ -9,12 +9,11 @@ import com.bumptech.glide.Glide // for images
 import com.example.bikekollective.databinding.SearchBikeItemBinding
 
 import com.example.bikekollective.models.Bike
-import java.text.DecimalFormat
 
 
 class BikeItemAdapter(
     val context:Context?,
-    private var userBikeList: MutableList<Bike?>?
+    private var bikeList: MutableList<Bike?>?
 
 ) : RecyclerView.Adapter<BikeItemAdapter.ViewHolder>(){
 
@@ -27,13 +26,17 @@ class BikeItemAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        val bike : Bike? = userBikeList?.get(position)
+        val bike : Bike? = bikeList?.get(position)
         if (bike != null) {
             var bikeAvailable : String = "Yes"
 
             // parse the geocoding
             val latitude = bike.latitude
             val longitude = bike.longitude
+
+            // get the user's location
+
+
 
             val availability = bike.isAvailable
             if (availability == false) {
@@ -46,7 +49,6 @@ class BikeItemAdapter(
             val description = "Description: ${bike.description}"
             val combination = "Combination: ${bike.combination}"
             val location = "Location: ${bike.latitude}, ${bike.longitude}"
-            val tags = "Tags: ${bike.tags}"
 
             // bind the text to the view
             viewHolder.binding.searchBikeRatings.text = ratings
@@ -54,7 +56,10 @@ class BikeItemAdapter(
             viewHolder.binding.searchBikeDescription.text = description
             viewHolder.binding.searchBikeLocation.text = location
             viewHolder.binding.searchBikeCombo.text = combination
-            viewHolder.binding.searchBikeTags.text = tags
+            if (bike.tags != null) {
+                val tags = "Tags: ${bike.tags}"
+                viewHolder.binding.searchBikeTags.text = tags
+            }
 
             // images for the bike
             if (!bike.imagePath.isNullOrEmpty()){
@@ -72,6 +77,6 @@ class BikeItemAdapter(
     }
 
     override fun getItemCount(): Int {
-        return userBikeList?.size ?: 0
+        return bikeList?.size ?: 0
     }
 }
