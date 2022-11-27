@@ -2,19 +2,24 @@ package com.example.bikekollective.adapters
 
 import android.R
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
+import com.example.bikekollective.BikeProfileActivity
+import com.example.bikekollective.EditBikeActivity
 import com.example.bikekollective.databinding.UserBikeItemBinding
 import com.example.bikekollective.models.Bike
 
 
 class UserBikeListAdapter(
     val context:Context?,
-    var userBikeList: MutableList<Bike?>?
+    var userBikeList: MutableList<Bike?>?,
+
 
     ) : RecyclerView.Adapter<UserBikeListAdapter.ViewHolder>(){
 
@@ -23,6 +28,7 @@ class UserBikeListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserBikeListAdapter.ViewHolder {
         val binding = UserBikeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding)
     }
 
@@ -35,6 +41,21 @@ class UserBikeListAdapter(
             viewHolder.binding.userBikeDescription.text = description
             viewHolder.binding.userBikeCombo.text = combination
             viewHolder.binding.userBikeCurrentLocation.text = location
+
+            viewHolder.binding.editBike.setOnClickListener{
+                var intent = Intent(context, EditBikeActivity::class.java)
+                intent.putExtra("bike", bike)
+                Log.i("AdapterA", bike.toString())
+                context?.startActivity(intent)
+            }
+
+
+            viewHolder.binding.userBikeContainer.setOnClickListener{
+                var intent = Intent(context, BikeProfileActivity::class.java)
+                intent.putExtra("bike", bike)
+                Log.i("AdapterA", bike.toString())
+                context?.startActivity(intent)
+            }
 
             if (!bike.imagePath.isNullOrEmpty()){
                 if (context != null) {
@@ -53,4 +74,5 @@ class UserBikeListAdapter(
     override fun getItemCount(): Int {
        return userBikeList?.size ?: 0
     }
+
 }

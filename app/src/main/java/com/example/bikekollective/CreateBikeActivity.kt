@@ -74,6 +74,10 @@ class CreateBikeActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        binding.bikeLocation.setOnClickListener {
+            startActivity(Intent(this, PickLocationMapsActivity::class.java))
+        }
+
         //ensure that tags aren't null and add chip choices
         if ((applicationContext as ApplicationContext).bikeTagList.isNullOrEmpty()){
             (applicationContext as ApplicationContext).queryBikeTags()
@@ -93,7 +97,7 @@ class CreateBikeActivity : AppCompatActivity() {
         }
 
         binding.ivExitCreateBike.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
         binding.bikeImage.setOnClickListener {
@@ -167,8 +171,12 @@ class CreateBikeActivity : AppCompatActivity() {
                         )
 
                         db.collection("bikes").add(bike).addOnSuccessListener { it ->
-
+                            //add bike ID
                             bike.documentId = it.id
+
+                            //add bike to global data
+                            (applicationContext as ApplicationContext).userBikeList?.add(bike)
+
                             Toast.makeText(
                             baseContext,
                             "Bike Added.",
@@ -187,11 +195,13 @@ class CreateBikeActivity : AppCompatActivity() {
                             binding.bikeLockCombination.text.clear()
                             binding.submitFormButton.isEnabled = true
                             binding.progressBar.visibility = View.INVISIBLE
+
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }.addOnFailureListener {
                             binding.submitFormButton.isEnabled = true
                             binding.progressBar.visibility = View.INVISIBLE
+
                         }
                         binding.submitFormButton.isEnabled = true
                         binding.progressBar.visibility = View.INVISIBLE

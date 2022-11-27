@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Add New Bike"
+            android:text="Edit Bike"
             android:textColor="@color/black"
 
             android:textSize="20sp" />
@@ -72,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@+id/edit_toolbar">
 
             <ImageView
-                android:id="@+id/edit_open_camera_button"
+                android:id="@+id/editBikeImage"
                 android:layout_width="237dp"
                 android:layout_height="211dp"
                 android:layout_marginTop="40dp"
@@ -95,7 +95,7 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_open_camera_button"
+                app:layout_constraintTop_toBottomOf="@+id/editBikeImage"
                 tools:ignore="LabelFor" />
 
             <EditText
@@ -114,14 +114,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/edit_bike_description"
                 tools:ignore="LabelFor" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_bike_location"
                 android:layout_width="320dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="7dp"
                 android:layout_marginTop="40dp"
+                android:background="@drawable/underline_text"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:textSize="20dp"
                 android:text="@string/create_form_location"
+                android:textColor="#8C8C8C"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.483"
                 app:layout_constraintStart_toStartOf="parent"

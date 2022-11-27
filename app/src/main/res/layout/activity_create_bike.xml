@@ -91,15 +91,17 @@
 
                 </TextView>
 
-                <EditText
+                <TextView
                     android:id="@+id/bike_location"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="6dp"
                     android:layout_marginTop="40dp"
 
                     android:ems="10"
-
-                    android:text="@string/create_form_location"
+                    android:textSize="19dp"
+                    android:text="Location: Tap to choose location"
+                    android:background="@drawable/underline_text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.483"
                     app:layout_constraintStart_toStartOf="parent"

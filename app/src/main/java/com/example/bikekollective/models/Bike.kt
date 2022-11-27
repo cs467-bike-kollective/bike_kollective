@@ -17,7 +17,7 @@ data class Bike(
     @get:PropertyName("rating_total") @set:PropertyName("rating_total") var ratingTotal: Double? = null,
     @get:PropertyName("number_of_ratings") @set:PropertyName("number_of_ratings")var numberOfRatings: Int? = null,
     @get:PropertyName("average_rating") @set:PropertyName("average_rating") var averageRating: Double? = null,
-    var tags: ArrayList<String>? = null,
+    var tag: ArrayList<String>? = null,
     @Exclude @DocumentId var documentId: String? = ""
 ):Parcelable{
     @Exclude
@@ -33,7 +33,7 @@ data class Bike(
             "rating_total" to ratingTotal,
             "number_of_ratings" to numberOfRatings,
             "average_rating" to averageRating,
-            "tag" to tags
+            "tag" to tag
 
         )
     }

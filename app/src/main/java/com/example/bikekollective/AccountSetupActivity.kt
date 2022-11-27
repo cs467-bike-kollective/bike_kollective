@@ -35,7 +35,8 @@ class AccountSetupActivity : AppCompatActivity() {
             "email" to currUser?.email.toString(),
             "display_name" to currUser?.displayName.toString(),
             "is_flagged" to false,
-            "borrowed_bike" to null
+            "borrowed_bike" to null,
+            "ride" to null
         )
         db.collection("users").document(currUser?.uid.toString())
             .set(userData).addOnCompleteListener {

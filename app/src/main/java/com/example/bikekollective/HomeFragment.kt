@@ -1,34 +1,52 @@
 package com.example.bikekollective
-
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+
+import com.bumptech.glide.Glide
+import android.widget.Button
+
 import com.example.bikekollective.databinding.FragmentHomeBinding
 import com.example.bikekollective.databinding.FragmentUserBikeListBinding
+import com.example.bikekollective.models.Bike
+import com.example.bikekollective.models.User
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class HomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
     private lateinit var binding: FragmentHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        db = Firebase.firestore
+        auth = Firebase.auth
         arguments?.let {
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        showBorrowedBike()
         binding.logoutBtn.setOnClickListener {
             activity?.let { it1 ->
                 AuthUI.getInstance()
@@ -42,8 +60,54 @@ class HomeFragment : Fragment() {
                     }
             }
         }
+
+        binding.returnBikeBut.setOnClickListener {
+            startActivity(Intent(context, ReturnBikeActivity::class.java))
+        }
+
+        binding.borrowedBikeCombination.visibility = GONE
         return binding.root
 
     }
+    private fun showBorrowedBike() {
+        db.collection("users").document(auth.currentUser?.uid.toString())
+            .get().addOnSuccessListener { snapshot ->
+                var currUser = snapshot.toObject(User::class.java)
+                if (currUser != null) {
+                    if (!currUser!!.borrowedBike.isNullOrEmpty()) {
+                        binding.returnBikeBut.visibility = VISIBLE
+                        db.collection("bikes").document(currUser?.borrowedBike.toString())
+                            .get().addOnSuccessListener { snapshot ->
+                                var bike = snapshot.toObject(Bike::class.java)
+                                binding.borrowedBikeCombination.visibility  = VISIBLE
+                                binding.borrowedBikeCombination.text = "Combination: ${bike?.combination}"
+                                if (!bike?.imagePath.isNullOrEmpty()) {
+                                    Glide.with(requireActivity().baseContext)
+                                        .load(bike?.imagePath.toString())
+                                        .centerCrop()
+                                        .into(binding.bikeImage)
+                                } else {
+                                    Glide.with(requireActivity().baseContext)
+                                        .load(R.drawable.no_image_curr_bike)
+                                        .centerCrop()
+                                        .into(binding.bikeImage)
+                                }
+
+                            }
+                    }else{
+                        Glide.with(requireActivity().baseContext)
+                            .load(R.drawable.no_curr_bike)
+                            .centerCrop()
+                            .into(binding.bikeImage)
+                        binding.returnBikeBut.visibility = GONE
+                        binding.borrowedBikeCombination.visibility  = GONE
+                    }
+                }
+
+            }
+
+        }
+
+
 
 }

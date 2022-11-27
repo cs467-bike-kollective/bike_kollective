@@ -15,6 +15,7 @@ import com.example.bikekollective.databinding.FragmentUserBikeListBinding
 class UserBikeList : Fragment() {
     private lateinit var binding: FragmentUserBikeListBinding
     private var recyclerView: RecyclerView? = null
+    private lateinit var userBikeAdapter: UserBikeListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,8 @@ class UserBikeList : Fragment() {
         binding.fabAddBike.setOnClickListener {
             startActivity(Intent(context, CreateBikeActivity::class.java))
         }
-        val userBikeAdapter = UserBikeListAdapter(context, (activity?.applicationContext as ApplicationContext).userBikeList)
+        userBikeAdapter = UserBikeListAdapter(context, (activity?.applicationContext as ApplicationContext).userBikeList)
+
 
 
         recyclerView = binding.rvUserBikeList
@@ -43,5 +45,9 @@ class UserBikeList : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        userBikeAdapter?.notifyDataSetChanged()
+    }
 
 }

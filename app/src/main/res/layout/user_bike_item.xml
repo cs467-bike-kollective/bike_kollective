@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_bike_container"
     android:layout_width="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp"
+    android:padding="20dp"
+    android:layout_margin="1dp"
+    android:background="@drawable/bike_item_border"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -43,6 +44,14 @@
         android:text="Combination:"
         app:layout_constraintStart_toStartOf="@+id/user_bike_description"
         app:layout_constraintTop_toBottomOf="@+id/user_bike_description" />
+
+    <ImageView
+        android:id="@+id/edit_bike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/bike_profile_image"
+        app:layout_constraintTop_toTopOf="@+id/bike_profile_image"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
