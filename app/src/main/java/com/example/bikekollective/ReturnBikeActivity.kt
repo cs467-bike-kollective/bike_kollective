@@ -23,8 +23,6 @@ import com.example.bikekollective.models.User
 import com.example.bikekollective.models.Ride
 
 class ReturnBikeActivity : AppCompatActivity() {
-
-
     private var bike: Bike? = null
     var user: User? = null
     private val db = Firebase.firestore
@@ -113,7 +111,7 @@ class ReturnBikeActivity : AppCompatActivity() {
                         ).addOnSuccessListener {
 
                             binding.buttonRate.isEnabled = true
-//                    startActivity(Intent(this, MainActivity::class.java))
+                            startActivity(Intent(this, MainActivity::class.java))
                             finish()
 
                         }.addOnFailureListener {

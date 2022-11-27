@@ -79,6 +79,7 @@ class HomeFragment : Fragment() {
                         db.collection("bikes").document(currUser?.borrowedBike.toString())
                             .get().addOnSuccessListener { snapshot ->
                                 var bike = snapshot.toObject(Bike::class.java)
+                                binding.borrowedBikeCombination.visibility  = VISIBLE
                                 binding.borrowedBikeCombination.text = "Combination: ${bike?.combination}"
                                 if (!bike?.imagePath.isNullOrEmpty()) {
                                     Glide.with(requireActivity().baseContext)
@@ -99,6 +100,7 @@ class HomeFragment : Fragment() {
                             .centerCrop()
                             .into(binding.bikeImage)
                         binding.returnBikeBut.visibility = GONE
+                        binding.borrowedBikeCombination.visibility  = GONE
                     }
                 }
 
