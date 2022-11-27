@@ -56,10 +56,10 @@ class BikeItemAdapter(
             viewHolder.binding.searchBikeDescription.text = description
             viewHolder.binding.searchBikeLocation.text = location
             viewHolder.binding.searchBikeCombo.text = combination
-            if (bike.tags != null) {
-                val tags = "Tags: ${bike.tags}"
-                viewHolder.binding.searchBikeTags.text = tags
-            }
+            //if (bike.tags != null) {
+                //val tags = "Tags: ${bike.tags}"
+                //viewHolder.binding.searchBikeTags.text = tags
+            //}
 
             // images for the bike
             if (!bike.imagePath.isNullOrEmpty()){
