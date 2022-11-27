@@ -11,6 +11,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -33,8 +35,6 @@ class CameraActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var destination: Int? = null
     private lateinit var outPutDirectory: File
-    private var latitude: Double? = null
-    private var longitude: Double? = null
 
     companion object {
         private const val TAG = "CameraXInfo"
@@ -46,6 +46,23 @@ class CameraActivity : AppCompatActivity() {
 //        val REQUIRED_PERMISSIONS_ALBUM = arrayOf(android.Manifest.permission.)
 
     }
+    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+        // Callback is invoked after the user selects a media item or closes the
+        // photo picker.
+        if (uri != null) {
+            Log.d("PhotoPicker", "Selected URI: $uri")
+            if (destination == FROM_ADD_BIKE_CODE){
+                var intentCreateBikeActivity = Intent()
+                intentCreateBikeActivity.putExtra("imageUri", uri.toString())
+
+                setResult(Activity.RESULT_OK, intentCreateBikeActivity)
+                finish()
+            }
+        } else {
+            Log.d("PhotoPicker", "No media selected")
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +73,7 @@ class CameraActivity : AppCompatActivity() {
 
 //        // hide action bar
         supportActionBar?.hide();
+
 
         binding.ivExitCamera.setOnClickListener {
             //todo check if it's from create bike activity
@@ -71,6 +89,8 @@ class CameraActivity : AppCompatActivity() {
         }
 
         binding.btnGetFromAlbum.setOnClickListener {
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+
 
         }
         binding.btnCapture.setOnClickListener {
