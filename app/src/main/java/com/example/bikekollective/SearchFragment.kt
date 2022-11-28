@@ -1,5 +1,6 @@
 package com.example.bikekollective
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +10,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bikekollective.adapters.BikeItemAdapter
+import com.example.bikekollective.databinding.ChipBinding
 import com.example.bikekollective.databinding.FragmentSearchBinding
 import com.example.bikekollective.models.Bike
+import com.google.android.material.chip.Chip
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -35,11 +38,21 @@ class SearchFragment : Fragment() {
             recyclerView!!.adapter = bikeItemAdapter
             recyclerView!!.layoutManager = LinearLayoutManager(context)
         }
+
+        /**
+        db.collection("bikes").whereEqualTo("is_available", true).whereArrayContains("tag", mutableListOf(tag))
+            .get().addOnSuccessListener { snapshot ->
+                bikeList = snapshot.toObjects(Bike::class.java)
+                Log.d(javaClass.simpleName, bikeList.toString())
+            }
+        **/
+
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
 
     }
+
 
 
 }
