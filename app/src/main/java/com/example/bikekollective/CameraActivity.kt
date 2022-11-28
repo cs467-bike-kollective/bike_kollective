@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -44,14 +45,15 @@ class CameraActivity : AppCompatActivity() {
 
 
     }
-    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+
+    val pickMedia = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { uri ->
         // Callback is invoked after the user selects a media item or closes the
         // photo picker.
-        if (uri != null) {
-            Log.d("PhotoPicker", "Selected URI: $uri")
+        if (uri.data?.data != null) {
+            Log.d("PhotoPicker", "Selected URI: ${uri.data?.data}")
 
                 var returnURI = Intent()
-                returnURI.putExtra("imageUri", uri.toString())
+                returnURI.putExtra("imageUri", uri.data?.data.toString())
 
                 setResult(Activity.RESULT_OK, returnURI)
                 finish()
@@ -87,11 +89,17 @@ class CameraActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS_CAMERA, REQUEST_CODE_PERMISSIONS)
         }
 
-        binding.btnGetFromAlbum.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-
-
-        }
+        binding.btnGetFromAlbum.visibility = View.GONE
+//        binding.btnGetFromAlbum.setOnClickListener {
+//            val intent = Intent()
+//            intent.type = "image/*"
+//            intent.action = Intent.ACTION_GET_CONTENT
+////            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//
+//            pickMedia.launch(Intent.createChooser(intent,"Select Picture"))
+//
+//
+//        }
         binding.btnCapture.setOnClickListener {
             takePhoto()
         }
