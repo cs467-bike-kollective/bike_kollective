@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -11,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@drawable/blue_bike_sport"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,6 +21,7 @@
         android:id="@+id/search_bike_ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Ratings: "
         app:layout_constraintStart_toStartOf="@+id/search_bike_image"
         app:layout_constraintTop_toBottomOf="@+id/search_bike_image" />
@@ -60,7 +63,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tags: "
-        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/search_bike_image"
         app:layout_constraintTop_toBottomOf="@+id/search_bike_combo" />
 
