@@ -1,10 +1,13 @@
 package com.example.bikekollective.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide // for images
+import com.example.bikekollective.BikeProfileActivity
 
 import com.example.bikekollective.databinding.SearchBikeItemBinding
 
@@ -61,6 +64,12 @@ class BikeItemAdapter(
                 viewHolder.binding.searchBikeTags.text = tags
             }
 
+            viewHolder.binding.bikeSearchLayout.setOnClickListener{
+                var intent = Intent(context, BikeProfileActivity::class.java)
+                intent.putExtra("bike", bike)
+                Log.i("AdapterSearch", bike.toString())
+                context?.startActivity(intent)
+            }
             // images for the bike
             if (!bike.imagePath.isNullOrEmpty()){
                 if (context != null) {
