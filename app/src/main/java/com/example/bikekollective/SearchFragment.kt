@@ -61,6 +61,7 @@ class SearchFragment : Fragment() {
         binding.chip1.setOnClickListener {
             Log.d(javaClass.simpleName, "Display the search result for " +
                     "bikes with ${binding.chip1.text} tag")
+            binding.chip1
         }
 
         binding.chip2.setOnClickListener {
