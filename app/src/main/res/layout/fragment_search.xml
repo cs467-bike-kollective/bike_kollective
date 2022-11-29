@@ -11,16 +11,20 @@
             android:id="@+id/chips"
             app:layout_constraintBottom_toTopOf="@+id/rv_search_bike_list"
             app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/search_head_text"
             android:text = "Click on the tag(s) to filter your search"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toTopOf="@+id/chip1"
             app:layout_constraintTop_toTopOf="parent"
             android:textStyle="bold">
         </TextView>
 
+        <!-- Row 1-->
         <com.google.android.material.chip.Chip
             android:id="@+id/chip1"
             android:layout_width="wrap_content"
@@ -28,8 +32,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Road"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_head_text"
+            app:layout_constraintBottom_toTopOf="@+id/chip5"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/chip2"/>
 
@@ -37,11 +41,11 @@
             android:id="@+id/chip2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BMX"
+            android:text="Fixed Gear"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_head_text"
+            app:layout_constraintBottom_toTopOf="@+id/chip5"
             app:layout_constraintLeft_toRightOf="@id/chip1"/>
 
         <com.google.android.material.chip.Chip
@@ -51,8 +55,8 @@
             android:text="Children's"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_head_text"
+            app:layout_constraintBottom_toTopOf="@+id/chip5"
             app:layout_constraintLeft_toRightOf="@id/chip2"/>
 
         <com.google.android.material.chip.Chip
@@ -62,10 +66,11 @@
             android:text="Tandem"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_head_text"
+            app:layout_constraintBottom_toTopOf="@+id/chip6"
             app:layout_constraintLeft_toRightOf="@id/chip3"/>
 
+        <!-- Row 2-->
         <com.google.android.material.chip.Chip
             android:id="@+id/chip5"
             android:layout_width="wrap_content"
@@ -73,20 +78,18 @@
             android:text="Mountain"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/chip4"/>
+            app:layout_constraintTop_toBottomOf="@id/chip1"
+            app:layout_constraintLeft_toLeftOf="parent"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fixed Gear"
+            android:text="BMX"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             app:layout_constraintTop_toBottomOf="@id/chip1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/chip6"/>
+            app:layout_constraintLeft_toRightOf="@id/chip5"/>
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip7"
@@ -96,7 +99,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             app:layout_constraintTop_toBottomOf="@id/chip1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/chip6"/>
 
         <com.google.android.material.chip.Chip
@@ -107,7 +109,6 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             app:layout_constraintTop_toBottomOf="@id/chip1"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/chip7"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
