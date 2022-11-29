@@ -1,6 +1,7 @@
 package com.example.bikekollective
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -41,7 +42,7 @@ class SearchFragment : Fragment() {
         }
 
         /**
-        db.collection("bikes").whereEqualTo("is_available", true).whereArrayContains("tag", "Cruiser")
+        db.collection("bikes").whereEqualTo("is_available", true).whereArrayContains("tag", "Road")
             .get().addOnSuccessListener { snapshot ->
                 bikeList = snapshot.toObjects(Bike::class.java)
                 Log.d(javaClass.simpleName, bikeList.toString())
@@ -50,7 +51,7 @@ class SearchFragment : Fragment() {
                 recyclerView!!.adapter = bikeItemAdapter
                 recyclerView!!.layoutManager = LinearLayoutManager(context)
             }
-        **/
+         **/
 
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false)
@@ -61,19 +62,38 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Click on each chip to view the filtered search result
-        // Road
-        binding.chip1.setOnClickListener {
+        val roadChip = binding.chip1
+        roadChip.setOnClickListener {
             Log.d(
                 javaClass.simpleName, "Display the search result for " +
-                        "${binding.choiceChips.childCount}"
+                        "${roadChip.text}"
             )
-            db.collection("bikes").whereEqualTo("is_available", true).whereArrayContains("tag", mutableListOf(tag))
-                .get().addOnSuccessListener { snapshot ->
-                    bikeList = snapshot.toObjects(Bike::class.java)
-                    Log.d(javaClass.simpleName, bikeList.toString())
-                }
+            roadChip.text = "✅ Road"
         }
+
+        val bmxChip = binding.chip6
+        bmxChip.setOnClickListener {
+            Log.d(
+                javaClass.simpleName, "Display the search result for " +
+                        "${bmxChip.text}"
+            )
+            bmxChip.text = "✅ BMX"
+            roadChip.text = "Road"
+        }
+
+
+        /**
+         binding.searchBut.setOnClickListener {
+        searchTerm = if(searchTerm.isEmpty() ) {
+        binding.searchBut.setBackgroundColor(Color.YELLOW)
+        "con"
+        } else {
+        binding.searchBut.setBackgroundColor(Color.WHITE)
+        ""
+        }
+        viewModel.setSearchTerm(searchTerm)
+        }
+         **/
 
     }
 
