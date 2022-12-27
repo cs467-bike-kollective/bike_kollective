@@ -1,4 +1,4 @@
-# bike_kollective
+# Bike Kollective
 
 ## Introduction
 Our project “The Bike Kollective” is an Android app for free, public bike sharing. We have accomplished a user-friendly, aesthetically pleasing app that serves our community and helps curb negative environmental impacts through promoting greener and more economical ways of transportation
