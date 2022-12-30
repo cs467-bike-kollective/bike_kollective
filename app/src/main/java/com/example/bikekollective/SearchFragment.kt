@@ -41,6 +41,9 @@ class SearchFragment : Fragment() {
             recyclerView!!.layoutManager = LinearLayoutManager(context)
         }
 
+        // Comment out the code above and un-comment the code below to
+        // display only the bikes with "Road Tag"
+        // This feature is in our future improvement list
         /**
         db.collection("bikes").whereEqualTo("is_available", true).whereArrayContains("tag", "Road")
             .get().addOnSuccessListener { snapshot ->
