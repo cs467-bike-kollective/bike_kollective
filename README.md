@@ -26,6 +26,4 @@ The Bike Kollective is a bike-sharing platform where users can share their bikes
 ### Bike Checkout
 <img src='https://github.com/cs467-bike-kollective/bike_kollective/blob/main/bike_checkout.gif' title='Video Walkthrough' width='250px' alt='Video Walkthrough' /><br>
 
-## To Test Features 
-1. Download the apk [file](https://github.com/cs467-bike-kollective/bike_kollective/blob/main/app-debug.apk)
-2. Follow instructions [here](https://github.com/cs467-bike-kollective/bike_kollective/blob/main/Installation%20and%20Instructions.pdf)
+
