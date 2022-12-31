@@ -10,6 +10,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.bikekollective.databinding.ActivityPickLocationMapsBinding
+import com.google.android.libraries.places.api.Places
+import java.util.Properties
 
 class PickLocationMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -21,6 +23,10 @@ class PickLocationMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityPickLocationMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // access API key stored in build config
+        Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
+        val placesClient = Places.createClient(this)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager

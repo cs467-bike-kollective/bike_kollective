@@ -109,5 +109,7 @@ dependencies {
 
     implementation 'androidx.activity:activity:1.6.1'
 
+    // places api key
+    implementation 'com.google.android.libraries.places:places:3.0.0'
 
 }
