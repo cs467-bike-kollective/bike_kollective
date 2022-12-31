@@ -10,5 +10,22 @@ The Bike Kollective is a bike-sharing platform where users can share their bikes
 - allow user to create and edit a bike
 - allow user to take photo of bike 
 - allow user to checkout bike, and return bike and add rating 
+
+## In Progress Features 
+- integrate MAPS API to specify location 
+- filter search by location 
+- filter search by available tags
+- add comments on ratings
+
 ## Technology Used 
 - Glide, Firestore/Firebase, CameraX, ViewBinding
+
+## Project Gifs 
+### Bike Creation
+<img src='https://github.com/cs467-bike-kollective/bike_kollective/blob/main/create_bike.gif' title='Video Walkthrough' width='250px' alt='Video Walkthrough' /><br>
+### Bike Checkout
+<img src='https://github.com/cs467-bike-kollective/bike_kollective/blob/main/bike_checkout.gif' title='Video Walkthrough' width='250px' alt='Video Walkthrough' /><br>
+
+## To Test Features 
+1. Download the apk [file](https://github.com/cs467-bike-kollective/bike_kollective/blob/main/app-debug.apk)
+2. Follow instructions [here](https://github.com/cs467-bike-kollective/bike_kollective/blob/main/Installation%20and%20Instructions.pdf)
